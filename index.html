@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zaik Family Tree — A Jewish Family from Odessa to Israel | MyHeritage</title>
+  <meta name="description" content="Explore the Zaik family history: a Jewish family rooted in Odessa, Tiraspol, and Lithuania who became pioneers in Rishon LeTsiyon, Israel. 119 people recorded across multiple generations." />
+
+  <!-- ============================================================
+       JSON-LD STRUCTURED DATA
+       Server-render this from your DB. Google reads this to map
+       the entire family graph without executing JavaScript.
+  ============================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "name": "Zaik Family Tree — A Jewish Family from Odessa to Israel",
+    "description": "A biographical chronicle of the Zaik family spanning five generations, from the Jewish communities of Odessa, Tiraspol and Lithuania to the pioneering settlements of Rishon LeTsiyon, Israel.",
+    "url": "https://www.myheritage.com/family-trees/zaik/OYYV7UQ56LKBFA2NZCAQMEI2RRQZUEA",
+    "mainEntity": {
+      "@type": "Person",
+      "@id": "#aryeh-zaik",
+      "name": "Aryeh Zaik",
+      "birthPlace": { "@type": "Place", "name": "Odessa, Ukraine" },
+      "deathPlace": { "@type": "Place", "name": "Rishon LeTsiyon, Israel" },
+      "spouse": {
+        "@type": "Person",
+        "@id": "#lea-zaik",
+        "name": "Lea Leika Zaik",
+        "birthPlace": { "@type": "Place", "name": "Tiraspol, Moldova" },
+        "deathPlace": { "@type": "Place", "name": "Rishon LeTsiyon, Israel" }
+      },
+      "children": [
+        {
+          "@type": "Person",
+          "@id": "#klara-zaik",
+          "name": "Klara (Haya) Zaik",
+          "birthPlace": { "@type": "Place", "name": "Russia" },
+          "deathPlace": { "@type": "Place", "name": "Rishon LeTsiyon, Israel" }
+        },
+        {
+          "@type": "Person",
+          "@id": "#yaakov-zaik",
+          "name": "Yaakov Zaik",
+          "birthPlace": { "@type": "Place", "name": "Israel" }
+        },
+        {
+          "@type": "Person",
+          "@id": "#yosef-zaik",
+          "name": "Yosef Zaik",
+          "birthPlace": { "@type": "Place", "name": "Israel" },
+          "deathPlace": { "@type": "Place", "name": "Rishon LeTsiyon, Israel" }
+        }
+      ]
+    },
+    "mentions": [
+      {
+        "@type": "Person",
+        "@id": "#nachum-goldin",
+        "name": "Nachum Goldin",
+        "birthPlace": { "@type": "Place", "name": "Telsai, Kovno Province, Lithuania" },
+        "deathPlace": { "@type": "Place", "name": "Rishon LeTsiyon, Israel" }
+      },
+      {
+        "@type": "Person",
+        "@id": "#yankel-goldin",
+        "name": "Yankel Goldin",
+        "birthPlace": { "@type": "Place", "name": "Lithuania" }
+      },
+      {
+        "@type": "Person",
+        "@id": "#aryeh-volchinsky",
+        "name": "Aryeh Yaron Volchinsky",
+        "birthPlace": { "@type": "Place", "name": "Kherson, Ukraine" },
+        "deathPlace": { "@type": "Place", "name": "Tel Aviv, Israel" }
+      },
+      {
+        "@type": "Person",
+        "@id": "#zeev-averbuch",
+        "name": "Zeev (Volodya) Averbuch",
+        "birthPlace": { "@type": "Place", "name": "Tiraspol, Russia" },
+        "deathPlace": { "@type": "Place", "name": "Tel Aviv, Israel" }
+      },
+      {
+        "@type": "Person",
+        "@id": "#avraham-sinyaver",
+        "name": "Avraham Sinyaver",
+        "birthPlace": { "@type": "Place", "name": "Odessa, Ukraine" },
+        "deathPlace": { "@type": "Place", "name": "Tel Aviv, Israel" }
+      },
+      {
+        "@type": "Person",
+        "@id": "#raphael-yavne",
+        "name": "Raphael Asher Yavne",
+        "birthPlace": { "@type": "Place", "name": "Shavel, Lithuania" },
+        "deathPlace": { "@type": "Place", "name": "Philadelphia, USA" }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --font-body: 'Georgia', 'Times New Roman', serif;
+      --font-ui: -apple-system, 'Helvetica Neue', 'Segoe UI', sans-serif;
+      --font-mono: 'Courier New', monospace;
+
+      --bg:       #f7f6f2;
+      --surface:  #ffffff;
+      --border:   rgba(0,0,0,0.09);
+      --border-md:rgba(0,0,0,0.16);
+
+      --text-1: #1c1c1a;
+      --text-2: #52524e;
+      --text-3: #8a8a84;
+
+      --accent:      #1a5e96;
+      --accent-bg:   #e8f2fb;
+      --accent-dark: #0c3d6b;
+
+      /* Generation colour ramps */
+      --c1: #0d6b54; --c1-bg: #e0f4ee; /* founders — deep teal */
+      --c2: #1a5e96; --c2-bg: #e8f2fb; /* 2nd gen — blue */
+      --c3: #5340b0; --c3-bg: #edeafb; /* 3rd gen — indigo */
+      --c4: #a05000; --c4-bg: #faebd6; /* 4th gen — amber */
+      --c5: #7a3060; --c5-bg: #f5e8f2; /* 5th gen — plum */
+
+      --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-ui); background: var(--bg); color: var(--text-1); line-height: 1.6; }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 24px; gap: 12px; flex-wrap: wrap;
+    }
+    .toolbar__crumb { font-size: 13px; color: var(--text-2); }
+    .toolbar__crumb strong { color: var(--text-1); font-weight: 600; }
+    .toolbar__meta { font-size: 12px; color: var(--text-3); }
+
+    .vtoggle {
+      display: flex;
+      border: 1px solid var(--border-md);
+      border-radius: var(--r-md);
+      overflow: hidden;
+    }
+    .vtoggle__btn {
+      padding: 8px 20px; font-size: 13px; font-weight: 500;
+      font-family: var(--font-ui);
+      cursor: pointer; background: transparent; border: none;
+      color: var(--text-2);
+      display: flex; align-items: center; gap: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .vtoggle__btn:hover { background: rgba(0,0,0,0.04); }
+    .vtoggle__btn.is-active {
+      background: var(--surface); color: var(--text-1);
+      box-shadow: inset 0 0 0 1px var(--border-md);
+    }
+    .vtoggle__btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ── VIEW PANELS ── */
+    /* SEO-safe hide: content stays in DOM, just visually removed */
+    .view.is-hidden {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+
+    /* ── TREE PLACEHOLDER ── */
+    .tree-placeholder {
+      height: 480px; display: flex; align-items: center;
+      justify-content: center; flex-direction: column; gap: 10px;
+      background: #f2f1ed; color: var(--text-3); font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tree-placeholder__icon { font-size: 36px; opacity: 0.35; }
+
+    /* ── NARRATIVE CONTAINER ── */
+    #view-narrative {
+      max-width: 960px; margin: 0 auto; padding: 40px 24px 80px;
+    }
+
+    /* ── HERO ── */
+    .hero { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    .hero__tag {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--c1); font-weight: 700; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero__tag::before { content:''; display:inline-block; width:20px; height:2px; background:var(--c1); border-radius:2px; }
+    .hero h1 {
+      font-family: var(--font-body);
+      font-size: 30px; font-weight: 700; line-height: 1.2;
+      color: var(--text-1); margin-bottom: 14px;
+    }
+    .hero__lead { font-size: 15px; color: var(--text-2); line-height: 1.75; max-width: 720px; }
+
+    .stats { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+    .stat {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 10px 18px;
+    }
+    .stat__n { font-size: 20px; font-weight: 700; color: var(--text-1); line-height: 1; }
+    .stat__l { font-size: 11px; color: var(--text-3); margin-top: 3px; }
+
+    /* ── MIGRATION BANNER ── */
+    .migration {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--c1);
+      border-radius: 0 var(--r-lg) var(--r-lg) 0;
+      padding: 22px 26px; margin-bottom: 36px;
+    }
+    .migration h2 {
+      font-family: var(--font-body); font-size: 17px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 10px;
+    }
+    .migration p { font-size: 14px; color: var(--text-2); line-height: 1.75; margin-bottom: 10px; }
+    .migration p:last-child { margin-bottom: 0; }
+    .migration strong { color: var(--text-1); }
+
+    /* ── GENERATION SECTION ── */
+    .gen { margin-bottom: 40px; }
+    .gen__hd {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+    }
+    .gen__label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .gen__line { flex: 1; height: 1px; background: var(--border); }
+    .gen__count {
+      font-size: 11px; color: var(--text-3);
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2px 10px; white-space: nowrap;
+    }
+
+    /* ── PERSON CARDS GRID ── */
+    .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+
+    /* ── PERSON CARD ── */
+    .pcard {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 16px 18px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      display: flex; flex-direction: column;
+    }
+    .pcard .plink { margin-top: 0; }
+    .pcard:hover { border-color: var(--border-md); box-shadow: 0 2px 14px rgba(0,0,0,0.06); }
+    .pcard--subject { border-left: 3px solid var(--c1); }
+    .pcard--diaspora { border-left: 3px solid var(--c4); }
+
+    .pcard__av {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; margin-bottom: 12px;
+      letter-spacing: 0.03em;
+    }
+    .av1 { background: var(--c1-bg); color: var(--c1); }
+    .av2 { background: var(--c2-bg); color: var(--c2); }
+    .av3 { background: var(--c3-bg); color: var(--c3); }
+    .av4 { background: var(--c4-bg); color: var(--c4); }
+    .av5 { background: var(--c5-bg); color: var(--c5); }
+
+    .pcard h3 { font-size: 14px; font-weight: 600; color: var(--text-1); margin-bottom: 2px; }
+    .pcard__sub { font-size: 12px; color: var(--text-3); margin-bottom: 9px; }
+    .pcard__bio { font-size: 13px; color: var(--text-2); line-height: 1.65; margin-bottom: 9px; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 11px; margin-top: auto; }
+    .pcard .pcard__bio { margin-bottom: 9px; }
+    .tag {
+      font-size: 11px; padding: 2px 7px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; color: var(--text-2);
+    }
+    .tag--loc::before { content: '📍 '; font-size: 10px; }
+    .tag--occ::before { content: '◆ '; font-size: 8px; }
+
+    .plink {
+      font-size: 12px; color: var(--accent); font-weight: 500;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 3px;
+    }
+    .plink:hover { text-decoration: underline; }
+
+    /* ── BRANCH STORIES ── */
+    .branch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; }
+    .branch {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 20px 22px;
+    }
+    .branch__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .branch h2 { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-1); }
+    .branch p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 8px; }
+    .branch p:last-child { margin-bottom: 0; }
+
+    /* ── MODERN GEN LIST ── */
+    .modern-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .modern-chip {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 5px 12px;
+      font-size: 13px; color: var(--text-2);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 620px) {
+      .toolbar { padding: 8px 14px; }
+      #view-narrative { padding: 22px 14px 50px; }
+      .hero h1 { font-size: 23px; }
+      .pgrid, .branch-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     TOOLBAR
+════════════════════════════════════════════════ -->
+<div class="toolbar" role="navigation" aria-label="View switcher">
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+    <span class="toolbar__crumb">Zaik Family Tree &nbsp;/&nbsp; <strong>Chronicle view</strong></span>
+    <span class="toolbar__meta">100+ people · 5 generations · Odessa → Israel</span>
+  </div>
+  <div class="vtoggle" role="tablist" aria-label="Switch between tree and chronicle">
+    <button class="vtoggle__btn is-active" id="btn-tree" role="tab" aria-selected="true" aria-controls="view-tree" onclick="switchView('tree')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><circle cx="6" cy="15" r="2"/><circle cx="18" cy="15" r="2"/><path d="M8 15H16M6 13V11a6 6 0 0112 0v2"/></svg>
+      Tree view
+    </button>
+    <button class="vtoggle__btn" id="btn-narrative" role="tab" aria-selected="false" aria-controls="view-narrative" onclick="switchView('narrative')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+      Chronicle view
+    </button>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     PANEL 1: TREE VIEW  (your existing canvas here)
+════════════════════════════════════════════════ -->
+<div id="view-tree" class="view" role="tabpanel" aria-labelledby="btn-tree">
+  <!-- Replace this div with your existing tree iframe / canvas -->
+  <div class="tree-placeholder">
+    <span class="tree-placeholder__icon">🌳</span>
+    <span>Interactive family tree renders here</span>
+    <span style="font-size:12px">Design preview — the live tree canvas loads in the real MyHeritage page</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     PANEL 2: NARRATIVE CHRONICLE
+     Both panels are in the DOM on page load.
+     Google crawls this even when it's toggled off.
+════════════════════════════════════════════════ -->
+<div id="view-narrative" class="view is-hidden" role="tabpanel" aria-labelledby="btn-narrative">
+
+  <!-- H1 — primary keyword heading -->
+  <header class="hero">
+    <p class="hero__tag">Family chronicle</p>
+    <h1>The Zaik family — a Jewish journey from Odessa and Tiraspol to the Land of Israel</h1>
+    <p class="hero__lead">
+      A biographical record of the Zaik family and its connected branches spanning five generations.
+      The family's story begins in the Jewish communities of <strong>Odessa</strong>,
+      <strong>Tiraspol</strong>, and <strong>Lithuania</strong> — and follows their migration
+      to <strong>Rishon LeTsiyon</strong> and <strong>Tel Aviv</strong>, where they became
+      part of the fabric of early Israeli society.
+    </p>
+    <div class="stats" role="list" aria-label="Family tree statistics">
+      <div class="stat" role="listitem"><div class="stat__n">119</div><div class="stat__l">People recorded</div></div>
+      <div class="stat" role="listitem"><div class="stat__n">5</div><div class="stat__l">Generations</div></div>
+      <div class="stat" role="listitem"><div class="stat__n">9+</div><div class="stat__l">Family surnames</div></div>
+      <div class="stat" role="listitem"><div class="stat__n">4</div><div class="stat__l">Countries of origin</div></div>
+    </div>
+  </header>
+
+
+  <!-- MIGRATION NARRATIVE — long-tail SEO text -->
+  <section class="migration" aria-labelledby="migration-heading">
+    <h2 id="migration-heading">The great migration: from the Pale of Settlement to Eretz Israel</h2>
+    <p>
+      The Zaik family's story is woven from the broader tapestry of
+      Jewish emigration from the Russian Empire. <strong>Aryeh Zaik</strong>, born in
+      <strong>Odessa, Ukraine</strong>, and his wife <strong>Lea Leika</strong>, born in
+      <strong>Tiraspol, Moldova</strong>, were among the families who made the journey to
+      <strong>Rishon LeTsiyon</strong> — one of the first modern Jewish settlements in Israel.
+    </p>
+    <p>
+      The connected Goldin family arrived from the Kovno Province of <strong>Lithuania</strong>,
+      with branches in Telsai, Keidan, and Vilna. The Gurevitch, Himelfarb, Volchinsky, Averbuch,
+      and Sinyaver families came from the Ukrainian cities of Odessa, Berdychiv, Kherson,
+      Mykolaiv, and Smila — part of the vast wave of Jewish aliyah that shaped modern Israel.
+      Some branches, like the Goldins, also sent family members westward to
+      <strong>Philadelphia</strong>, <strong>Baltimore</strong>, and <strong>Newport</strong>,
+      tracing the twin paths of Jewish emigration in that era.
+    </p>
+    <p>
+      The family put down roots in Israel — in
+      Rishon LeTsiyon, Tel Aviv, Ramat Gan, Rehovot, and Petah Tiqwa —
+      with the youngest generation growing up as native Israelis.
+    </p>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       GEN 1: THE FOUNDERS
+  ═══════════════════════════════ -->
+  <section class="gen" aria-labelledby="gen1-heading">
+    <div class="gen__hd">
+      <span style="color:var(--c1)" class="gen__label">Generation 1 — the founders</span>
+      <div class="gen__line"></div>
+      <span class="gen__count">Zaik &amp; Goldin patriarchs</span>
+    </div>
+
+    <div class="pgrid">
+
+      <article class="pcard pcard--subject" id="aryeh-zaik" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av1" aria-hidden="true">AZ</div>
+        <h3 itemprop="name">Aryeh Zaik</h3>
+        <p class="pcard__sub">Patriarch of the Zaik family</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Odessa, Ukraine</strong></span>,
+          Aryeh Zaik immigrated to Ottoman Palestine and settled in
+          <span itemprop="deathPlace">Rishon LeTsiyon, Israel</span>,
+          where he is buried in the Old Cemetery.
+          Father of Klara (Haya), Yaakov, and Yosef Zaik.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Odessa, Ukraine</span>
+          <span class="tag tag--loc">Rishon LeTsiyon</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/aryeh_zaik" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard pcard--subject" id="lea-zaik" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av1" aria-hidden="true">LL</div>
+        <h3 itemprop="name">Lea Leika Zaik</h3>
+        <p class="pcard__sub">Spouse of Aryeh Zaik</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Tiraspol, Moldova</strong></span>,
+          Lea settled in Rishon LeTsiyon, Israel, where she is
+          buried in the Gani Esther old cemetery.
+          Wife of Aryeh Zaik.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Tiraspol, Moldova</span>
+          <span class="tag tag--loc">Rishon LeTsiyon</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/lea_leika" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard pcard--diaspora" id="yankel-goldin" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av4" aria-hidden="true">YG</div>
+        <h3 itemprop="name">Yankel Goldin</h3>
+        <p class="pcard__sub">Patriarch of the Goldin family</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Lithuania / Vilna</strong></span>,
+          Yankel Goldin is the patriarch of the Lithuanian-origin Goldin branch,
+          whose descendants spread to Israel, America, and England.
+          Father of Nachum, Nochim, Chaya Sarah, Rivka Beckie, and others.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Vilna, Lithuania</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/yankel_goldin" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard pcard--diaspora" id="cheie-goldin" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av4" aria-hidden="true">CF</div>
+        <h3 itemprop="name">Cheie Lea Furmansky (Goldin)</h3>
+        <p class="pcard__sub">Spouse of Yankel Goldin</p>
+        <p class="pcard__bio">
+          Born Cheie Lea Lilian Furmansky, she married
+          Yankel Goldin
+          and together they established the Goldin family line
+          across Lithuania and beyond.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Lithuania</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/cheie_furman" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard pcard--diaspora" id="azriel-margolis" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av4" aria-hidden="true">AM</div>
+        <h3 itemprop="name">Azriel Mendel Margolis</h3>
+        <p class="pcard__sub">Patriarch of the Margolis family</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Dotnava, Lithuania</strong></span>,
+          Azriel Mendel Margolis is the patriarch of the Margolis line, which connects
+          to the Goldin family through his daughter Chaya Sore.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Dotnava, Lithuania</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/azriel_margolis" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="gedalyahu-gurevitch" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av3" aria-hidden="true">GG</div>
+        <h3 itemprop="name">Gedalyahu (Gedalye) Gurevitch</h3>
+        <p class="pcard__sub">Patriarch of the Gurevitch family</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Russia</strong></span>,
+          Gedalyahu Gurevitch is the patriarch of the Gurevitch branch,
+          whose children — David-Shmuel, Bella, Layzer-Eliezer, Mosik-Moshe,
+          Srulik-Israel, and Yosef — settled across Israel.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Russia</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/gedalyahu_gurevitch" itemprop="url">View full profile →</a>
+      </article>
+
+    </div>
+  </section><!-- /gen1 -->
+
+
+  <!-- ═══════════════════════════════
+       GEN 2: THE CHILDREN
+  ═══════════════════════════════ -->
+  <section class="gen" aria-labelledby="gen2-heading">
+    <div class="gen__hd">
+      <span style="color:var(--c2)" class="gen__label">Generation 2 — children of the founders</span>
+      <div class="gen__line"></div>
+      <span class="gen__count">Zaik, Goldin, Gurevitch, Averbuch lines</span>
+    </div>
+
+    <div class="pgrid">
+
+      <article class="pcard" id="klara-zaik" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">KZ</div>
+        <h3 itemprop="name">Klara (Haya) Zaik</h3>
+        <p class="pcard__sub">Daughter of Aryeh &amp; Lea Zaik</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Russia</strong></span>,
+          Klara (also known as Haya) was a daughter of
+          Aryeh and Lea Zaik.
+          She settled in <span itemprop="deathPlace">Rishon LeTsiyon, Israel</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Russia</span>
+          <span class="tag tag--loc">Rishon LeTsiyon</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/klara_" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="yaakov-zaik" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">YZ</div>
+        <h3 itemprop="name">Yaakov Zaik</h3>
+        <p class="pcard__sub">Son of Aryeh &amp; Lea Zaik</p>
+        <p class="pcard__bio">
+          Son of Aryeh and Lea Zaik.
+          Born and lived in <span itemprop="birthPlace"><strong>Israel</strong></span>,
+          part of the first Israel-born generation of the Zaik family.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Israel</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/yaakov_zaik" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="yosef-zaik" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">YZ</div>
+        <h3 itemprop="name">Yosef Zaik</h3>
+        <p class="pcard__sub">Son of Aryeh &amp; Lea Zaik</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Israel</strong></span>,
+          Yosef Zaik continued the family's roots in
+          <span itemprop="deathPlace">Rishon LeTsiyon</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Rishon LeTsiyon</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/yosef_zaik" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="nachum-goldin" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">NG</div>
+        <h3 itemprop="name">Nachum Goldin</h3>
+        <p class="pcard__sub">Son of Yankel Goldin</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Telsai, Kovno Province, Lithuania</strong></span>,
+          Nachum Goldin immigrated to Israel and died in
+          <span itemprop="deathPlace">Rishon LeTsiyon</span>,
+          following in the Zaik family's footsteps to the same settlement.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Telsai, Lithuania</span>
+          <span class="tag tag--loc">Rishon LeTsiyon</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/nachum_goldin" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="chaya-sarah-goldin" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">CS</div>
+        <h3 itemprop="name">Chaya Sarah Goldin</h3>
+        <p class="pcard__sub">Daughter of Yankel Goldin · American branch</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Keidan, Lithuania</strong></span>,
+          Chaya Sarah emigrated to the United States and
+          died in <span itemprop="deathPlace">Philadelphia, Pennsylvania</span> —
+          representing the American branch of the Goldin family.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Keidan, Lithuania</span>
+          <span class="tag tag--loc">Philadelphia, USA</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/chaya_goldin" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="nochim-goldin" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">NO</div>
+        <h3 itemprop="name">Nochim Goldin</h3>
+        <p class="pcard__sub">Son of Yankel Goldin</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Vilna, Lithuania</strong></span>,
+          Nochim is a son of Yankel Goldin
+          and sibling of Nachum, Chaya Sarah, and Rivka Beckie Goldin.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Vilna, Lithuania</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/nochim_goldin" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="rivka-goldin" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">RB</div>
+        <h3 itemprop="name">Rivka Beckie Goldin (Shapiro)</h3>
+        <p class="pcard__sub">Daughter of Yankel Goldin · married Shapiro</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Keidan, Lithuania</strong></span>,
+          Rivka Beckie married David Herman Shapiro
+          and died in <span itemprop="deathPlace">Newport</span>.
+          Part of the Anglo-American branch of the Goldin family.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Keidan, Lithuania</span>
+          <span class="tag tag--loc">Newport, UK</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/rivka_goldin" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="zeev-averbuch" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">ZA</div>
+        <h3 itemprop="name">Zeev (Volodya) Averbuch</h3>
+        <p class="pcard__sub">Patriarch of the Averbuch line</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Tiraspol, southern Russia</strong></span>
+          (the same city as Lea Leika Zaik), Zeev settled in
+          <span itemprop="deathPlace">Tel Aviv, Israel</span>.
+          Husband of Genia (née Berniskai/Alperin). Father of Naomi.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Tiraspol, Russia</span>
+          <span class="tag tag--loc">Tel Aviv</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/%D7%96%D7%90%D7%91_%D7%90%D7%95%D7%95%D7%A8%D7%91%D7%95%D7%9A" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="avraham-sinyaver" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">AS</div>
+        <h3 itemprop="name">Avraham Sinyaver</h3>
+        <p class="pcard__sub">Patriarch of the Sinyaver line</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Odessa, Ukraine</strong></span>,
+          Avraham Sinyaver settled in
+          <span itemprop="deathPlace">Tel Aviv, Israel</span>.
+          Father of Ora, Naomi Sinyaver, and grandfather of the Reifman family.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Odessa, Ukraine</span>
+          <span class="tag tag--loc">Tel Aviv</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/%D7%90%D7%91%D7%A8%D7%94%D7%9D_%D7%A1%D7%99%D7%A0%D7%99%D7%90%D7%91%D7%A8" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="mordechai-volchinsky" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av2" aria-hidden="true">MV</div>
+        <h3 itemprop="name">Mordechai Volchinsky</h3>
+        <p class="pcard__sub">Patriarch of the Volchinsky line</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Nikolaev (Mykolaiv), Kherson Province, Ukraine</strong></span>,
+          Mordechai Matveivich Volchinsky (also known as Velinsky / Veltzinski)
+          died at Beilinson Hospital, <span itemprop="deathPlace">Petah Tiqwa, Israel</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Nikolaev, Ukraine</span>
+          <span class="tag tag--loc">Petah Tiqwa</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/%D7%9E%D7%A8%D7%93%D7%9B%D7%99_%D7%95%D7%95%D7%9C%D7%A6%27%D7%99%D7%A0%D7%A1%D7%A7%D7%99" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="raphael-yavne" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av4" aria-hidden="true">RY</div>
+        <h3 itemprop="name">Raphael Asher Yavne</h3>
+        <p class="pcard__sub">American branch</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Shavel (Šiauliai), Lithuania</strong></span>,
+          Raphael Asher Yavne emigrated to the United States
+          and died in <span itemprop="deathPlace">Philadelphia, Pennsylvania</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Shavel, Lithuania</span>
+          <span class="tag tag--loc">Philadelphia, USA</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/raphael_yavne" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="david-shapiro" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av4" aria-hidden="true">DS</div>
+        <h3 itemprop="name">David Herman Shapiro</h3>
+        <p class="pcard__sub">Married Rivka Beckie Goldin</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Russia</strong></span>,
+          David Herman Shapiro emigrated and died in
+          <span itemprop="deathPlace">Baltimore, USA</span>.
+          Married Rivka Beckie Goldin.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Russia</span>
+          <span class="tag tag--loc">Baltimore, USA</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/david_shapiro" itemprop="url">View full profile →</a>
+      </article>
+
+    </div>
+  </section><!-- /gen2 -->
+
+
+  <!-- ═══════════════════════════════
+       GEN 3: THE MIDDLE GENERATION
+  ═══════════════════════════════ -->
+  <section class="gen" aria-labelledby="gen3-heading">
+    <div class="gen__hd">
+      <span style="color:var(--c3)" class="gen__label">Generation 3 — the Israeli generation</span>
+      <div class="gen__line"></div>
+      <span class="gen__count">Born in Israel, Ukraine &amp; Moldova</span>
+    </div>
+
+    <div class="pgrid">
+
+      <article class="pcard" id="gabi-flynn" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av3" aria-hidden="true">GF</div>
+        <h3 itemprop="name">Gabi Flynn</h3>
+        <p class="pcard__sub">Born Ramat Gan · lives Rishon LeTsiyon</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Ramat Gan, Israel</strong></span>,
+          Gabi Flynn is the son of Frank Leo Flynn
+          and lives in <span itemprop="homeLocation">Rishon LeTsiyon, Israel</span>.
+          Married to Adina Zaik.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Ramat Gan</span>
+          <span class="tag tag--loc">Rishon LeTsiyon</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/gabi_flynn" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="frank-flynn" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av4" aria-hidden="true">FF</div>
+        <h3 itemprop="name">Frank Leo Flynn</h3>
+        <p class="pcard__sub">Father of Gabi Flynn · born England</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>England, United Kingdom</strong></span>,
+          Frank Leo Flynn is the English-origin patriarch of the Flynn branch,
+          connecting the family to Anglo-Jewish heritage.
+          Father of Gabi Flynn.
+        </p>
+        <div class="tags"><span class="tag tag--loc">England, UK</span></div>
+        <a class="plink" href="https://www.myheritage.com/names/frank_%D7%A4%D7%9C%D7%99%D7%9F" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="naomi-averbuch" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av3" aria-hidden="true">NA</div>
+        <h3 itemprop="name">Naomi Averbuch (Flynn Arkin)</h3>
+        <p class="pcard__sub">Daughter of Zeev Averbuch</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Tel Aviv-Yafo, Israel</strong></span>,
+          Naomi is the daughter of Zeev Averbuch
+          and Genia (née Berniskai). She died in
+          <span itemprop="deathPlace">Rishon LeTsiyon, Israel</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Tel Aviv</span>
+          <span class="tag tag--loc">Rishon LeTsiyon</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/naomi_%D7%90%D7%95%D7%95%D7%A8%D7%91%D7%95%D7%9A" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="aryeh-volchinsky" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av3" aria-hidden="true">AV</div>
+        <h3 itemprop="name">Aryeh (Lonya) Yaron Volchinsky</h3>
+        <p class="pcard__sub">Son of Mordechai Volchinsky</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Kherson / Nikolaev, Ukraine</strong></span>,
+          Aryeh (also known as Lonya or Lev) Volchinsky died at
+          <span itemprop="deathPlace">Ichilov Hospital, Tel Aviv, Israel</span>.
+          Married <span style="font-weight:600;color:var(--text-1)">Rachel Himelfarb</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Kherson, Ukraine</span>
+          <span class="tag tag--loc">Tel Aviv</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/%D7%90%D7%A8%D7%99%D7%94_%D7%99%D7%A8%D7%95%D7%9F" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="rachel-himelfarb" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av3" aria-hidden="true">RH</div>
+        <h3 itemprop="name">Rachel (Raya) Himelfarb (Volchinsky)</h3>
+        <p class="pcard__sub">Daughter of Zvi Hirsch Himelfarb</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Odessa, Ukraine</strong></span>,
+          Rachel (Raya) Himelfarb married Aryeh Volchinsky.
+          She died in <span itemprop="deathPlace">Holon, Israel</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Odessa, Ukraine</span>
+          <span class="tag tag--loc">Holon, Israel</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/%D7%A8%D7%97%D7%9C_%D7%94%D7%99%D7%9E%D7%9C%D7%A4%D7%A8%D7%91" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="tzonya-berniskai" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av3" aria-hidden="true">TB</div>
+        <h3 itemprop="name">Tzonya (Tzvia) Berniskai (Averbuch)</h3>
+        <p class="pcard__sub">Married Zeev Averbuch</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Smila, Cherkasy Oblast, Ukraine</strong></span>,
+          Tzonya married Zeev Averbuch
+          and died in <span itemprop="deathPlace">Ramat Efal, Ramat Gan, Israel</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Smila, Ukraine</span>
+          <span class="tag tag--loc">Ramat Gan</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/%D7%A6%D7%95%D7%A0%D7%99%D7%94_%D7%91%D7%A8%D7%A0%D7%99%D7%A1%D7%A7%D7%99" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="ora-sinyaver" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av3" aria-hidden="true">OS</div>
+        <h3 itemprop="name">Ora Sinyaver (Reifman)</h3>
+        <p class="pcard__sub">Daughter of Avraham Sinyaver</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Tel Aviv-Yafo, Israel</strong></span>,
+          Ora is the daughter of Avraham Sinyaver.
+          She married Uri Reifman and died in
+          <span itemprop="deathPlace">Ramat Gan, Israel</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Tel Aviv</span>
+          <span class="tag tag--loc">Ramat Gan</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/%D7%90%D7%95%D7%A8%D7%94_%D7%A1%D7%99%D7%A0%D7%99%D7%90%D7%91%D7%A8" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="sonia-barankin" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av3" aria-hidden="true">SB</div>
+        <h3 itemprop="name">Sonia Barankin (Karni)</h3>
+        <p class="pcard__sub">Married Yehuda Karni</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Oman / Okraina</strong></span>,
+          Sonia Barankin married
+          Yehuda Karni
+          (born in Lithuania) and settled in
+          <span itemprop="homeLocation">Ramat HaShofet, Israel</span>.
+        </p>
+        <div class="tags">
+          <span class="tag tag--loc">Oman / Okraina</span>
+          <span class="tag tag--loc">Ramat HaShofet</span>
+        </div>
+        <a class="plink" href="https://www.myheritage.com/names/sonia_barankin" itemprop="url">View full profile →</a>
+      </article>
+
+      <article class="pcard" id="yehuda-karni" itemscope itemtype="https://schema.org/Person">
+        <div class="pcard__av av3" aria-hidden="true">YK</div>
+        <h3 itemprop="name">Yehuda Karni</h3>
+        <p class="pcard__sub">Married Sonia Barankin</p>
+        <p class="pcard__bio">
+          Born in <span itemprop="birthPlace"><strong>Lithuania</strong></span>,
+          Yehuda Karni married Sonia Barankin
+          and settled in Ramat HaShofet, Israel.
+        </p>
+        <div class="tags"><span class="tag tag--loc">Lithuania</span></div>
+        <a class="plink" href="https://www.myheritage.com/names/yehuda_karni" itemprop="url">View full profile →</a>
+      </article>
+
+    </div>
+  </section><!-- /gen3 -->
+
+
+  <!-- ═══════════════════════════════
+       BRANCH STORIES
+  ═══════════════════════════════ -->
+  <section aria-labelledby="branches-heading">
+    <div class="gen__hd" style="margin-bottom:18px">
+      <h2 id="branches-heading" style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--text-3)">Family branches</h2>
+      <div class="gen__line"></div>
+    </div>
+    <div class="branch-grid">
+
+      <div class="branch">
+        <p class="branch__eyebrow" style="color:var(--c1)">Zaik branch</p>
+        <h2>From Odessa to Rishon LeTsiyon</h2>
+        <p>The Zaik family, rooted in Odessa and Tiraspol, were among the early settlers of Rishon LeTsiyon — one of the first Zionist agricultural settlements, founded in 1882. Aryeh and Lea Zaik's descendants have lived there across five generations.</p>
+      </div>
+
+      <div class="branch">
+        <p class="branch__eyebrow" style="color:var(--c4)">Goldin branch</p>
+        <h2>Lithuania to Israel, America &amp; England</h2>
+        <p>The Goldin family from Vilna, Telsai, and Keidan (Kėdainiai), Lithuania dispersed in three directions: Nachum Goldin settled in Rishon LeTsiyon alongside the Zaiks; Chaya Sarah and Rivka Beckie emigrated to America and England; while others remained connected to the Lithuanian Jewish world.</p>
+      </div>
+
+      <div class="branch">
+        <p class="branch__eyebrow" style="color:var(--c2)">Averbuch–Berniskai branch</p>
+        <h2>Tiraspol &amp; Smila to Tel Aviv</h2>
+        <p>Zeev Averbuch (from Tiraspol) and Genia née Berniskai (from Smila, Ukraine) met and built their family in Tel Aviv. Their daughter Naomi lived in Rishon LeTsiyon, bridging the Averbuch and Zaik circles.</p>
+      </div>
+
+      <div class="branch">
+        <p class="branch__eyebrow" style="color:var(--c3)">Volchinsky–Himelfarb branch</p>
+        <h2>Kherson &amp; Berdychiv to Petah Tiqwa</h2>
+        <p>The Volchinsky family from Nikolaev (Mykolaiv) and the Himelfarb family from Berdychiv and Odessa converged in Petah Tiqwa, Israel. Aryeh Volchinsky married Rachel Himelfarb, uniting two Ukrainian-origin families in the heart of Israel.</p>
+      </div>
+
+      <div class="branch">
+        <p class="branch__eyebrow" style="color:var(--c5)">Sinyaver–Reifman branch</p>
+        <h2>Odessa to Tel Aviv &amp; Ramat Gan</h2>
+        <p>Avraham Sinyaver emigrated from Odessa to Tel Aviv. His daughter Ora Sinyaver and her husband Uri Reifman built their family in Ramat Gan.</p>
+      </div>
+
+      <div class="branch">
+        <p class="branch__eyebrow" style="color:var(--c4)">Flynn branch</p>
+        <h2>England to Ramat Gan &amp; Rishon LeTsiyon</h2>
+        <p>Frank Leo Flynn, born in England, is the patriarch of the Israeli Flynn family. His son Gabi, born in Ramat Gan, married Adina Zaik — joining the English and Zionist pioneer heritages into a single Israeli family.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /view-narrative -->
+
+
+<script>
+  function switchView(v) {
+    var tree      = document.getElementById('view-tree');
+    var narrative = document.getElementById('view-narrative');
+    var btnT      = document.getElementById('btn-tree');
+    var btnN      = document.getElementById('btn-narrative');
+
+    if (v === 'tree') {
+      tree.classList.remove('is-hidden');
+      narrative.classList.add('is-hidden');
+      btnT.classList.add('is-active');
+      btnN.classList.remove('is-active');
+      btnT.setAttribute('aria-selected', 'true');
+      btnN.setAttribute('aria-selected', 'false');
+    } else {
+      narrative.classList.remove('is-hidden');
+      tree.classList.add('is-hidden');
+      btnN.classList.add('is-active');
+      btnT.classList.remove('is-active');
+      btnN.setAttribute('aria-selected', 'true');
+      btnT.setAttribute('aria-selected', 'false');
+    }
+
+  }
+
+  // On load, respect URL hash (only when running as a real page, not in iframe preview)
+  try {
+    if (window.location.hash === '#chronicle') switchView('narrative');
+  } catch(e) {}
+</script>
+
+</body>
+</html>
