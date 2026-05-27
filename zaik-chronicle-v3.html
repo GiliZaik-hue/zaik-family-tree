@@ -631,75 +631,560 @@
     .immig-migration-text p:last-child { margin-bottom: 0; }
     .immig-migration-text strong { color: var(--text-1); }
 
-    /* ── HORIZONTAL TIMELINE ── */
+    /* ── FAMILY TIMELINE ── */
     .htl-section { margin-bottom: 48px; }
-    .htl-outer { position: relative; }
-    .htl-wrap {
-      overflow-x: auto; scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch; scrollbar-width: none;
-      padding: 40px 20px 28px; position: relative;
+    .htl-outer { position: relative; padding: 0 40px; }
+    .htl-scroll {
+      overflow-x: auto; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
-    .htl-wrap::-webkit-scrollbar { display: none; }
+    .htl-scroll::-webkit-scrollbar { display: none; }
     .htl-track {
       display: flex; align-items: flex-start;
-      min-width: max-content; position: relative;
+      min-width: max-content;
+      padding: 72px 0 40px;
+      position: relative; gap: 12px;
     }
     .htl-track::before {
       content: ''; position: absolute;
-      left: 0; right: 0; top: 13px;
+      left: 0; right: 0; top: 22px;
       height: 2px; background: var(--border-md);
     }
     .htl-item {
       display: flex; flex-direction: column; align-items: center;
-      width: 180px; flex-shrink: 0;
-      scroll-snap-align: start;
-      padding: 0 10px; position: relative;
+      width: 200px; flex-shrink: 0; padding: 0 10px;
+      position: relative;
     }
-    .htl-dot-w {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--surface); border: 2px solid var(--border-md);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 12px; z-index: 2; flex-shrink: 0;
+    .htl-item:hover .htl-card {
+      border-color: var(--border-md);
+      background: var(--bg);
     }
-    .htl-dot {
+    .htl-pin {
       width: 12px; height: 12px; border-radius: 50%;
-      background: var(--text-2);
+      background: var(--text-3);
+      border: 2.5px solid var(--surface);
+      position: absolute; top: 16px; z-index: 2;
+      transition: transform .15s;
     }
-    .htl-dot--migrate {
-      width: 14px; height: 14px;
-      background: #0d6b54;
+    .htl-item:hover .htl-pin { transform: scale(1.5); }
+    .htl-pin--migrate { background: #0d6b54; }
+    .htl-connector {
+      position: absolute; top: 22px; left: 50%;
+      width: 1.5px; height: 40px;
+      background: var(--border);
+      z-index: 1;
+    }
+    .htl-connector--migrate { background: rgba(13,107,84,0.3); }
+    .htl-spacer { height: 62px; }
+    .htl-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 14px 14px;
+      width: 100%;
+      min-height: 110px;
+      display: flex; flex-direction: column;
+      transition: border-color .15s, background .15s;
+    }
+    .htl-card--dashed { border-style: dashed; }
+    .htl-badge {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      color: #0d6b54; border: 0.5px solid #0d6b54;
+      border-radius: 4px; padding: 1px 6px;
+      margin-bottom: 6px; letter-spacing: .02em;
+      align-self: flex-start;
     }
     .htl-era {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: .07em; text-transform: uppercase;
-      color: var(--text-3); margin-bottom: 5px; text-align: center;
+      font-size: 10px; color: var(--text-3);
+      margin-bottom: 4px; letter-spacing: .03em;
     }
     .htl-name {
       font-size: 12px; font-weight: 600; color: var(--text-1);
-      text-align: center; line-height: 1.35; margin-bottom: 4px;
+      line-height: 1.4; margin-bottom: 5px;
     }
     .htl-sub {
       font-size: 11px; color: var(--text-3);
-      text-align: center; line-height: 1.45;
+      line-height: 1.5; margin-top: auto;
     }
-    .htl-arrow {
-      position: absolute; top: 28px;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--surface); border: 1px solid var(--border-md);
+    .htl-btn {
+      position: absolute; top: 10px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border-md);
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; z-index: 10; font-size: 20px;
-      color: var(--text-2); transition: background .15s, opacity .2s;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+      cursor: pointer; z-index: 10; font-size: 16px;
+      color: var(--text-2);
+      transition: background .15s, opacity .2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
     }
-    .htl-arrow:hover { background: var(--bg); }
-    .htl-arrow--prev { left: -4px; }
-    .htl-arrow--next { right: -4px; }
-    .htl-arrow.hidden { opacity: 0; pointer-events: none; }
-    @media (max-width: 700px) {
-      .immig-two-col { grid-template-columns: 1fr; }
-      .immig-migration-text { border-left: none; border-top: 1px solid var(--border); }
-      .htl-event { flex: 0 0 160px; }
+    .htl-btn:hover { background: var(--bg); }
+    .htl-btn--prev { left: 4px; }
+    .htl-btn--next { right: 4px; }
+    .htl-btn.hidden { opacity: 0; pointer-events: none; }
+    .htl-legend {
+      display: flex; gap: 20px;
+      padding: 12px 0 0; font-size: 11px; color: var(--text-3);
     }
+    .htl-legend span { display: flex; align-items: center; gap: 6px; }
+    .htl-legend b {
+      width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+    }
+    /* ── RELATED FAMILY TREES ── */
+    .related-trees { margin-bottom: 44px; }
+    .related-trees__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .related-tree-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      display: flex; align-items: flex-start; gap: 14px;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+    .related-tree-card:hover {
+      border-color: var(--border-md);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transform: translateY(-1px);
+    }
+    .related-tree-card__avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .related-tree-card__body { flex: 1; min-width: 0; }
+    .related-tree-card__name {
+      font-size: 14px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 3px;
+    }
+    .related-tree-card__rel {
+      font-size: 12px; color: var(--text-3);
+      margin-bottom: 8px; line-height: 1.4;
+    }
+    .related-tree-card__meta { margin-bottom: 10px; }
+    .related-tree-card__stat {
+      font-size: 12px; color: var(--text-2);
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 3px 10px;
+      display: inline-block;
+    }
+    .related-tree-card__link {
+      font-size: 12px; font-weight: 600;
+      color: var(--accent); text-decoration: none;
+      display: block; margin-top: 2px;
+    }
+    .related-tree-card__link:hover { text-decoration: underline; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: #fdf6f0;
+      border-radius: var(--r-lg);
+      padding: 48px 32px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: var(--font-body);
+      font-size: 22px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 32px;
+      max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.3;
+    }
+    .cta-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; text-align: left;
+    }
+    .cta-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 24px 22px;
+      display: flex; flex-direction: column;
+    }
+    .cta-card__icon {
+      font-size: 32px; margin-bottom: 14px;
+    }
+    .cta-card h3 {
+      font-size: 15px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 10px; line-height: 1.3;
+    }
+    .cta-card p {
+      font-size: 13px; color: var(--text-2);
+      line-height: 1.65; margin-bottom: 20px; flex: 1;
+    }
+    .cta-card__btn {
+      display: inline-block; text-align: center;
+      padding: 10px 20px; border-radius: 100px;
+      font-size: 13px; font-weight: 600;
+      font-family: var(--font-ui);
+      cursor: pointer; text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+      border: none; margin-top: auto;
+    }
+    .cta-card__btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .cta-card__btn--filled {
+      background: #e8622a; color: #fff;
+    }
+    .cta-card__btn--outline {
+      background: transparent; color: #e8622a;
+      border: 1.5px solid #e8622a;
+    }
+
+    /* ── RESPONSIVE ADDITIONS ── */
+    @media (max-width: 620px) {
+      .branch-strip__grid { grid-template-columns: 1fr 1fr; }
+      .cta-section { padding: 32px 16px; }
+      .cta-cards { grid-template-columns: 1fr; }
+    }
+
+    /* ── EXISTING STYLES ── */
+    body { font-family: var(--font-ui); background: var(--bg); color: var(--text-1); line-height: 1.6; }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 24px; gap: 12px; flex-wrap: wrap;
+    }
+    .toolbar__crumb { font-size: 13px; color: var(--text-2); }
+    .toolbar__crumb strong { color: var(--text-1); font-weight: 600; }
+    .toolbar__meta { font-size: 12px; color: var(--text-3); }
+
+    .vtoggle {
+      display: flex;
+      border: 1px solid var(--border-md);
+      border-radius: var(--r-md);
+      overflow: hidden;
+    }
+    .vtoggle__btn {
+      padding: 8px 20px; font-size: 13px; font-weight: 500;
+      font-family: var(--font-ui);
+      cursor: pointer; background: transparent; border: none;
+      color: var(--text-2);
+      display: flex; align-items: center; gap: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .vtoggle__btn:hover { background: rgba(0,0,0,0.04); }
+    .vtoggle__btn.is-active {
+      background: var(--surface); color: var(--text-1);
+      box-shadow: inset 0 0 0 1px var(--border-md);
+    }
+    .vtoggle__btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ── VIEW PANELS ── */
+    /* SEO-safe hide: content stays in DOM, just visually removed */
+    .view.is-hidden {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+
+    /* ── TREE PLACEHOLDER ── */
+    .tree-placeholder {
+      height: 480px; display: flex; align-items: center;
+      justify-content: center; flex-direction: column; gap: 10px;
+      background: #f2f1ed; color: var(--text-3); font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tree-placeholder__icon { font-size: 36px; opacity: 0.35; }
+
+    /* ── NARRATIVE CONTAINER ── */
+    #view-narrative {
+      max-width: 960px; margin: 0 auto; padding: 40px 24px 80px;
+    }
+
+    /* ── HERO — editorial style ── */
+    .hero {
+      text-align: center;
+      padding: 56px 24px 44px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+      background: var(--surface);
+    }
+    .hero__eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--c1); margin-bottom: 16px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .hero__eyebrow::before, .hero__eyebrow::after {
+      content: ''; width: 28px; height: 1.5px;
+      background: var(--c1); border-radius: 2px;
+    }
+    .hero h1 {
+      font-family: var(--font-body);
+      font-size: clamp(30px, 5vw, 48px);
+      font-weight: 700; line-height: 1.12;
+      color: var(--text-1);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--c1);
+    }
+    .hero__divider {
+      width: 48px; height: 3px;
+      background: var(--c1); border-radius: 2px;
+      margin: 0 auto 20px;
+    }
+    .hero__lead {
+      font-size: 15px; color: var(--text-2);
+      line-height: 1.8; max-width: 640px;
+      margin: 0 auto 32px;
+      text-align: center;
+    }
+
+    /* ── CHRONICLE SEARCH BAR ── */
+    .chronicle-search {
+      max-width: 860px; margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      text-align: left;
+    }
+    .chronicle-search__label {
+      font-size: 12px; color: var(--text-3);
+      margin-bottom: 10px;
+    }
+    .chronicle-search__bar {
+      display: flex; align-items: center;
+      gap: 0; border: 1px solid var(--border-md);
+      border-radius: var(--r-md); overflow: hidden;
+      background: var(--surface);
+    }
+    .chronicle-search__input {
+      flex: 1; border: none; outline: none;
+      padding: 11px 14px; font-size: 13px;
+      font-family: var(--font-ui); color: var(--text-1);
+      background: transparent; min-width: 0;
+    }
+    .chronicle-search__input--sm { flex: 0.6; }
+    .chronicle-search__input::placeholder { color: var(--text-3); }
+    .chronicle-search__divider {
+      width: 1px; height: 28px; background: var(--border-md); flex-shrink: 0;
+    }
+    .chronicle-search__btn {
+      background: #e8622a; color: #fff;
+      border: none; padding: 11px 22px;
+      font-size: 13px; font-weight: 700;
+      font-family: var(--font-ui); cursor: pointer;
+      white-space: nowrap; flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .chronicle-search__btn:hover { background: #c9501e; }
+
+    @media (max-width: 640px) {
+      .chronicle-search__bar { flex-wrap: wrap; }
+      .chronicle-search__input { flex: 1 1 45%; }
+      .chronicle-search__divider { display: none; }
+      .chronicle-search__btn { width: 100%; padding: 12px; }
+    }
+
+    /* ── MIGRATION BANNER ── */
+    .migration {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--c1);
+      border-radius: 0 var(--r-lg) var(--r-lg) 0;
+      padding: 22px 26px; margin-bottom: 36px;
+    }
+    .migration h2 {
+      font-family: var(--font-body); font-size: 17px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 10px;
+    }
+    .migration p { font-size: 14px; color: var(--text-2); line-height: 1.75; margin-bottom: 10px; }
+    .migration p:last-child { margin-bottom: 0; }
+    .migration strong { color: var(--text-1); }
+
+    /* ── GENERATION SECTION ── */
+    .gen { margin-bottom: 40px; }
+    .gen__hd {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+    }
+    .gen__label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .gen__line { flex: 1; height: 1px; background: var(--border); }
+    .gen__count {
+      font-size: 11px; color: var(--text-3);
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2px 10px; white-space: nowrap;
+    }
+
+    /* ── PERSON CARDS ROW (horizontal scroll) ── */
+    .gen { position: relative; margin-bottom: 44px; }
+    .pgrid-wrap { position: relative; padding: 0 20px; }
+    .pgrid {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .pgrid::-webkit-scrollbar { display: none; }
+    .pgrid .pcard {
+      flex: 0 0 200px;
+      scroll-snap-align: start;
+    }
+
+    /* scroll arrows */
+    .pgrid-arrow {
+      position: absolute; top: 50%; transform: translateY(-60%);
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #e8622a; color: #fff; border: none;
+      font-size: 20px; cursor: pointer; z-index: 5;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: background 0.15s, opacity 0.2s;
+      line-height: 1;
+    }
+    .pgrid-arrow:hover { background: #c9501e; }
+    .pgrid-arrow--prev { left: -4px; }
+    .pgrid-arrow--next { right: -4px; }
+    .pgrid-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    /* ── PERSON CARD — centered photo style ── */
+    .pcard {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 24px 18px 18px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+    }
+    .pcard:hover { border-color: var(--border-md); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .pcard--subject {}
+    .pcard--diaspora {}
+
+    /* Large circular photo placeholder */
+    .pcard__av {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #2c2825;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px; flex-shrink: 0; overflow: hidden;
+      position: relative;
+    }
+    .pcard__av::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 44px; height: 48px;
+      background: #4a433d;
+      border-radius: 50% 50% 0 0;
+    }
+    .pcard__av::before {
+      content: '';
+      position: absolute; bottom: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 22px; height: 22px;
+      background: #4a433d;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    /* Hide old initials text */
+    .pcard__av span { display: none; }
+    .av1,.av2,.av3,.av4,.av5 { background: #2c2825; color: transparent; }
+
+    .pcard__era {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 8px; display: block;
+    }
+    .pcard h3 {
+      font-size: 14px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 3px;
+      line-height: 1.3;
+    }
+    .pcard__sub {
+      font-size: 12px; color: var(--text-3);
+      margin-bottom: 14px; line-height: 1.4;
+    }
+
+    /* Fact rows with icons */
+    .pcard__facts {
+      width: 100%; display: flex; flex-direction: column;
+      gap: 6px; margin-bottom: 14px; text-align: left;
+    }
+    .pcard__fact {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12px; color: var(--text-2); line-height: 1.4;
+    }
+    .pcard__fact-icon {
+      font-size: 12px; flex-shrink: 0; margin-top: 1px; opacity: 0.7;
+    }
+
+    /* Remove old bio/tags styles from cards */
+    .pcard .pcard__bio { display: none; }
+    .pcard .tags { display: none; }
+
+    .plink {
+      font-size: 12px; color: var(--text-1); font-weight: 500;
+      text-decoration: underline; text-underline-offset: 2px;
+      display: inline-flex; align-items: center; gap: 3px;
+      margin-top: auto;
+    }
+    .plink:hover { color: var(--accent); }
+
+    /* ── BRANCH STORIES ── */
+    .branch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; }
+    .branch {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 20px 22px;
+    }
+    .branch__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .branch h2 { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-1); }
+    .branch p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 8px; }
+    .branch p:last-child { margin-bottom: 0; }
+
+    /* ── MODERN GEN LIST ── */
+    .modern-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .modern-chip {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 5px 12px;
+      font-size: 13px; color: var(--text-2);
+    }
+
+    /* ── IMMIGRATION + MIGRATION TWO-COLUMN ── */
+    .immig-section { margin-bottom: 48px; }
+    .immig-two-col {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .immig-left { display: flex; flex-direction: column; }
+    .immig-migration-text {
+      padding: 28px 28px 24px;
+      border-left: 1px solid var(--border);
+      background: var(--surface);
+      overflow-y: auto;
+    }
+    .immig-migration-text h2 {
+      font-family: var(--font-body);
+      font-size: 16px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .immig-migration-text p {
+      font-size: 13px; color: var(--text-2);
+      line-height: 1.8; margin-bottom: 10px;
+    }
+    .immig-migration-text p:last-child { margin-bottom: 0; }
+    .immig-migration-text strong { color: var(--text-1); }
+
+
     .immig-outer {
       display: grid;
       grid-template-columns: 260px 1fr;
@@ -1147,542 +1632,181 @@
       <h2 id="htl-heading" class="gen__label" style="color:var(--c3)">Family timeline</h2>
       <div class="gen__line"></div>
     </div>
-    <p style="font-size:12px;color:var(--text-3);margin-bottom:16px">Key events ordered chronologically. Scroll to explore →</p>
+    <p style="font-size:12px;color:var(--text-3);margin-bottom:16px">Key events ordered chronologically — scroll to explore</p>
 
     <div class="htl-outer">
-      <button class="htl-arrow htl-arrow--prev hidden" id="htl-prev" onclick="scrollHtl2(-1)" aria-label="Scroll left">&#8249;</button>
-      <div class="htl-wrap" id="htl-wrap">
+      <button class="htl-btn htl-btn--prev hidden" id="htl-prev" onclick="scrollHtl2(-1)" aria-label="Scroll left">&#8249;</button>
+      <div class="htl-scroll" id="htl-wrap">
         <div class="htl-track">
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot"></div></div>
-            <div class="htl-era">1800s</div>
-            <div class="htl-name">Origins in Eastern Europe</div>
-            <div class="htl-sub">Zaik · Goldin · Gurevitch in Odessa, Vilna &amp; Russia</div>
+            <div class="htl-pin"></div>
+            <div class="htl-connector"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-era">1800s</div>
+              <div class="htl-name">Origins in Eastern Europe</div>
+              <div class="htl-sub">Zaik · Goldin · Gurevitch — Odessa, Vilna, Russia</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot"></div></div>
-            <div class="htl-era">1800s</div>
-            <div class="htl-name">Himelfarb family</div>
-            <div class="htl-sub">Zvi Hirsch born — Berdychiv, Ukraine</div>
+            <div class="htl-pin"></div>
+            <div class="htl-connector"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-era">1800s</div>
+              <div class="htl-name">Himelfarb &amp; Volchinsky born</div>
+              <div class="htl-sub">Zvi Hirsch — Berdychiv · Mordechai — Nikolaev</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot"></div></div>
-            <div class="htl-era">1800s</div>
-            <div class="htl-name">Volchinsky family</div>
-            <div class="htl-sub">Mordechai born — Nikolaev, Kherson</div>
+            <div class="htl-pin"></div>
+            <div class="htl-connector"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-era">1800s</div>
+              <div class="htl-name">Goldin patriarchs born</div>
+              <div class="htl-sub">Yankel in Vilna · Chaim Zisel in Siluva</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot"></div></div>
-            <div class="htl-era">1800s</div>
-            <div class="htl-name">Sinyaver family</div>
-            <div class="htl-sub">Avraham born — Odessa, Ukraine</div>
+            <div class="htl-pin"></div>
+            <div class="htl-connector"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-era">1800s</div>
+              <div class="htl-name">Averbuch &amp; Berniskai born</div>
+              <div class="htl-sub">Zeev — Tiraspol · Tzonya &amp; Katya — Smila, Mykolaiv</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot"></div></div>
-            <div class="htl-era">1800s</div>
-            <div class="htl-name">Goldin patriarchs</div>
-            <div class="htl-sub">Yankel in Vilna · Chaim Zisel in Siluva · Nochim &amp; Etta in Vilna</div>
+            <div class="htl-pin htl-pin--migrate"></div>
+            <div class="htl-connector htl-connector--migrate"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-badge">Migration</div>
+              <div class="htl-era">Early 1900s</div>
+              <div class="htl-name">Aryeh &amp; Lea Zaik arrive</div>
+              <div class="htl-sub">Odessa &amp; Tiraspol → Rishon LeTsiyon</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot"></div></div>
-            <div class="htl-era">1800s</div>
-            <div class="htl-name">Averbuch &amp; Berniskai</div>
-            <div class="htl-sub">Zeev in Tiraspol · Tzonya &amp; Katya in Smila &amp; Mykolaiv</div>
+            <div class="htl-pin htl-pin--migrate"></div>
+            <div class="htl-connector htl-connector--migrate"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-badge">Migration</div>
+              <div class="htl-era">Early 1900s</div>
+              <div class="htl-name">Goldin — three paths</div>
+              <div class="htl-sub">Nachum → Israel · Chaya Sarah → Philadelphia · Rivka → Newport</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot htl-dot--migrate"></div></div>
-            <div class="htl-era">Early 1900s</div>
-            <div class="htl-name">Aryeh Zaik migrates ✈</div>
-            <div class="htl-sub">Odessa → Rishon LeTsiyon, Israel</div>
+            <div class="htl-pin htl-pin--migrate"></div>
+            <div class="htl-connector htl-connector--migrate"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-badge">Migration</div>
+              <div class="htl-era">Early 1900s</div>
+              <div class="htl-name">Averbuch to Tel Aviv</div>
+              <div class="htl-sub">Zeev Averbuch — Tiraspol → Tel Aviv</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot htl-dot--migrate"></div></div>
-            <div class="htl-era">Early 1900s</div>
-            <div class="htl-name">Lea Leika arrives ✈</div>
-            <div class="htl-sub">Tiraspol, Moldova → Rishon LeTsiyon</div>
+            <div class="htl-pin htl-pin--migrate"></div>
+            <div class="htl-connector htl-connector--migrate"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-badge">Migration</div>
+              <div class="htl-era">Early 1900s</div>
+              <div class="htl-name">Himelfarb &amp; Volchinsky</div>
+              <div class="htl-sub">Both families → Petah Tiqwa</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot htl-dot--migrate"></div></div>
-            <div class="htl-era">Early 1900s</div>
-            <div class="htl-name">Goldin splits — 3 paths ✈</div>
-            <div class="htl-sub">Nachum → Israel · Chaya Sarah → Philadelphia · Rivka → Newport</div>
+            <div class="htl-pin htl-pin--migrate"></div>
+            <div class="htl-connector htl-connector--migrate"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-badge">Migration</div>
+              <div class="htl-era">Early 1900s</div>
+              <div class="htl-name">Alperin to Tel Aviv</div>
+              <div class="htl-sub">Chaim Alperin — Minsk → Tel Aviv</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot htl-dot--migrate"></div></div>
-            <div class="htl-era">Early 1900s</div>
-            <div class="htl-name">Averbuch migrates ✈</div>
-            <div class="htl-sub">Zeev — Tiraspol → Tel Aviv</div>
+            <div class="htl-pin"></div>
+            <div class="htl-connector"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-era">Mid 1900s</div>
+              <div class="htl-name">2nd generation born</div>
+              <div class="htl-sub">Klara · Yaakov · Yosef Zaik · Naomi Sinyaver</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot htl-dot--migrate"></div></div>
-            <div class="htl-era">Early 1900s</div>
-            <div class="htl-name">Himelfarb migrates ✈</div>
-            <div class="htl-sub">Menachem — Odessa → Petah Tiqwa</div>
+            <div class="htl-pin htl-pin--migrate"></div>
+            <div class="htl-connector htl-connector--migrate"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-badge">Migration</div>
+              <div class="htl-era">Mid 1900s</div>
+              <div class="htl-name">Frank Flynn arrives</div>
+              <div class="htl-sub">England → Ramat Gan, Israel</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot htl-dot--migrate"></div></div>
-            <div class="htl-era">Early 1900s</div>
-            <div class="htl-name">Volchinsky migrates ✈</div>
-            <div class="htl-sub">Mordechai — Nikolaev → Petah Tiqwa</div>
+            <div class="htl-pin"></div>
+            <div class="htl-connector"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-era">Mid 1900s</div>
+              <div class="htl-name">Israeli generation born</div>
+              <div class="htl-sub">Ora Sinyaver · Uri Reifman · Naomi Averbuch · Daniel Alperin</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot htl-dot--migrate"></div></div>
-            <div class="htl-era">Early 1900s</div>
-            <div class="htl-name">Alperin migrates ✈</div>
-            <div class="htl-sub">Chaim — Minsk → Tel Aviv</div>
+            <div class="htl-pin"></div>
+            <div class="htl-connector"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card">
+              <div class="htl-era">Late 1900s</div>
+              <div class="htl-name">3rd generation settles</div>
+              <div class="htl-sub">Yosef &amp; Gabi Flynn in Rishon LeTsiyon · Ora in Ramat Gan</div>
+            </div>
           </div>
 
           <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot"></div></div>
-            <div class="htl-era">Mid 1900s</div>
-            <div class="htl-name">2nd generation born</div>
-            <div class="htl-sub">Klara · Yaakov &amp; Yosef Zaik · Naomi Sinyaver</div>
+            <div class="htl-pin" style="background:var(--text-3);opacity:.5"></div>
+            <div class="htl-connector" style="opacity:.4"></div>
+            <div class="htl-spacer"></div>
+            <div class="htl-card htl-card--dashed">
+              <div class="htl-era">Oct 2023</div>
+              <div class="htl-name">Tree last updated</div>
+              <div class="htl-sub">Gili Zaik · 119 people recorded</div>
+            </div>
           </div>
 
-          <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot htl-dot--migrate"></div></div>
-            <div class="htl-era">Mid 1900s</div>
-            <div class="htl-name">Frank Flynn migrates ✈</div>
-            <div class="htl-sub">England → Ramat Gan, Israel</div>
-          </div>
-
-          <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot"></div></div>
-            <div class="htl-era">Mid 1900s</div>
-            <div class="htl-name">Israeli generation born</div>
-            <div class="htl-sub">Ora Sinyaver · Uri Reifman · Naomi Averbuch · Daniel Alperin</div>
-          </div>
-
-          <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot"></div></div>
-            <div class="htl-era">Late 1900s</div>
-            <div class="htl-name">3rd generation settles</div>
-            <div class="htl-sub">Yosef &amp; Gabi Flynn in Rishon LeTsiyon · Ora Sinyaver in Ramat Gan</div>
-          </div>
-
-          <div class="htl-item">
-            <div class="htl-dot-w"><div class="htl-dot" style="background:var(--text-3);width:10px;height:10px"></div></div>
-            <div class="htl-era">Oct 2023</div>
-            <div class="htl-name">Tree last updated</div>
-            <div class="htl-sub">Gili Zaik · 119 people recorded</div>
-          </div>
-
-        </div><!-- /htl-track -->
-      </div><!-- /htl-wrap -->
-      <button class="htl-arrow htl-arrow--next" id="htl-next" onclick="scrollHtl2(1)" aria-label="Scroll right">&#8250;</button>
-    </div><!-- /htl-outer -->
-
-    <!-- legend -->
-    <div style="display:flex;align-items:center;gap:20px;padding:12px 0 0;font-size:11px;color:var(--text-3)">
-      <span style="display:flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border-radius:50%;background:#0d6b54;flex-shrink:0"></span>Migration event</span>
-      <span style="display:flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border-radius:50%;background:var(--text-2);flex-shrink:0"></span>Birth / settlement</span>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════
-       GEN 1: THE FOUNDERS
-  ═══════════════════════════════ -->
-  <section class="gen" aria-labelledby="gen1-heading">
-    <div class="gen__hd">
-      <span style="color:var(--c1)" class="gen__label">Generation 1 — the founders</span>
-      <div class="gen__line"></div>
-      <span class="gen__count">Zaik &amp; Goldin patriarchs</span>
-    </div>
-    <div class="pgrid-wrap">
-      <button class="pgrid-arrow pgrid-arrow--prev hidden" onclick="scrollRow('gen1-row',-1)" aria-label="Scroll left">&#8249;</button>
-      <div class="pgrid" id="gen1-row">
-
-      <article class="pcard" id="aryeh-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av1" aria-hidden="true"></div>
-        <span class="pcard__era">Founders · Late 1800s</span>
-        <h3 itemprop="name">Aryeh Zaik</h3>
-        <p class="pcard__sub">Patriarch of the Zaik family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span itemprop="birthPlace">Born : Odessa, Ukraine</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🏠</span><span>Settled: Rishon LeTsiyon</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Old Cemetery, Rishon LeTsiyon</span></div>
         </div>
-        <a class="plink" href="https://www.myheritage.com/names/aryeh_zaik" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="lea-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av1" aria-hidden="true"></div>
-        <span class="pcard__era">Founders · Late 1800s</span>
-        <h3 itemprop="name">Lea Leika Zaik</h3>
-        <p class="pcard__sub">Spouse of Aryeh Zaik</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span itemprop="birthPlace">Born : Tiraspol, Moldova</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🏠</span><span>Settled: Rishon LeTsiyon</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Gani Esther old cemetery</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/lea_leika" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="yankel-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true"></div>
-        <span class="pcard__era">Founders · Late 1800s</span>
-        <h3 itemprop="name">Yankel Goldin</h3>
-        <p class="pcard__sub">Patriarch of the Goldin family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span itemprop="birthPlace">Born : Lithuania / Vilna</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/yankel_goldin" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="cheie-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true"></div>
-        <span class="pcard__era">Founders · Late 1800s</span>
-        <h3 itemprop="name">Cheie Lea Furmansky (Goldin)</h3>
-        <p class="pcard__sub">Spouse of Yankel Goldin</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span itemprop="birthPlace">Born : Lithuania</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/cheie_furman" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="azriel-margolis" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true"></div>
-        <span class="pcard__era">Founders · Late 1800s</span>
-        <h3 itemprop="name">Azriel Mendel Margolis</h3>
-        <p class="pcard__sub">Patriarch of the Margolis family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span itemprop="birthPlace">Born : Dotnava, Lithuania</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/azriel_margolis" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="gedalyahu-gurevitch" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true"></div>
-        <span class="pcard__era">Founders · Late 1800s</span>
-        <h3 itemprop="name">Gedalyahu (Gedalye) Gurevitch</h3>
-        <p class="pcard__sub">Patriarch of the Gurevitch family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span itemprop="birthPlace">Born : Russia</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/gedalyahu_gurevitch" itemprop="url">View full profile</a>
-      </article>
-
-      </div><!-- /pgrid gen1 -->
-      <button class="pgrid-arrow pgrid-arrow--next" onclick="scrollRow('gen1-row',1)" aria-label="Scroll right">&#8250;</button>
-    </div><!-- /pgrid-wrap -->
-  </section><!-- /gen1 -->
-
-
-  <!-- ═══════════════════════════════
-       GEN 2: THE CHILDREN
-  ═══════════════════════════════ -->
-  <section class="gen" aria-labelledby="gen2-heading">
-    <div class="gen__hd">
-      <span style="color:var(--c2)" class="gen__label">Generation 2 — children of the founders</span>
-      <div class="gen__line"></div>
-      <span class="gen__count">Zaik, Goldin, Gurevitch, Averbuch lines</span>
-    </div>
-    <div class="pgrid-wrap">
-      <button class="pgrid-arrow pgrid-arrow--prev hidden" onclick="scrollRow('gen2-row',-1)" aria-label="Scroll left">&#8249;</button>
-      <div class="pgrid" id="gen2-row">
-
-      <article class="pcard" id="klara-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Klara (Haya) Zaik</h3>
-        <p class="pcard__sub">Daughter of Aryeh &amp; Lea Zaik</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Russia</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🏠</span><span>Settled: Rishon LeTsiyon, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/klara_" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="yaakov-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Yaakov Zaik</h3>
-        <p class="pcard__sub">Son of Aryeh &amp; Lea Zaik</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Israel</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🏠</span><span>Settled: Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/yaakov_zaik" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="yosef-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Yosef Zaik</h3>
-        <p class="pcard__sub">Son of Aryeh &amp; Lea Zaik</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Israel</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🏠</span><span>Settled: Rishon LeTsiyon, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/yosef_zaik" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="nachum-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Nachum Goldin</h3>
-        <p class="pcard__sub">Son of Yankel Goldin</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Telsai, Kovno Province, Lithuania</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Rishon LeTsiyon, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/nachum_goldin" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="chaya-sarah-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Chaya Sarah Goldin</h3>
-        <p class="pcard__sub">Daughter of Yankel Goldin</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Keidan, Lithuania</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Philadelphia, USA</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/chaya_goldin" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="nochim-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Nochim Goldin</h3>
-        <p class="pcard__sub">Son of Yankel Goldin</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Vilna, Lithuania</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/nochim_goldin" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="rivka-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Rivka Beckie Goldin (Shapiro)</h3>
-        <p class="pcard__sub">Daughter of Yankel Goldin</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Keidan, Lithuania</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Newport</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/rivka_goldin" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="zeev-averbuch" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Zeev (Volodya) Averbuch</h3>
-        <p class="pcard__sub">Averbuch family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Tiraspol, S. Russia</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Tel Aviv-Yafo, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%96%D7%90%D7%91_%D7%90%D7%95%D7%95%D7%A8%D7%91%D7%95%D7%9A" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="avraham-sinyaver" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av5" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Avraham Sinyaver</h3>
-        <p class="pcard__sub">Sinyaver family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Odessa, Ukraine</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Tel Aviv, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%90%D7%91%D7%A8%D7%94%D7%9D_%D7%A1%D7%99%D7%A0%D7%99%D7%90%D7%91%D7%A8" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="mordechai-volchinsky" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Mordechai Volchinsky</h3>
-        <p class="pcard__sub">Volchinsky family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Nikolaev, Kherson, Ukraine</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Beilinson Hospital, Petah Tiqwa</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%9E%D7%A8%D7%93%D7%9B%D7%99_%D7%95%D7%95%D7%9C%D7%A6%27%D7%99%D7%A0%D7%A1%D7%A7%D7%99" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="raphael-yavne" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">Raphael Asher Yavne</h3>
-        <p class="pcard__sub">Yavne family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Shavel, Lithuania</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Philadelphia, USA</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/raphael_yavne" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="david-shapiro" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true"></div>
-        <span class="pcard__era">First Israel generation · Early 1900s</span>
-        <h3 itemprop="name">David Herman Shapiro</h3>
-        <p class="pcard__sub">Shapiro family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Russia</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Baltimore, USA</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/david_shapiro" itemprop="url">View full profile</a>
-      </article>
-
-      </div><!-- /pgrid gen2 -->
-      <button class="pgrid-arrow pgrid-arrow--next" onclick="scrollRow('gen2-row',1)" aria-label="Scroll right">&#8250;</button>
-    </div><!-- /pgrid-wrap -->
-  </section><!-- /gen2 -->
-
-
-  <!-- ═══════════════════════════════
-       GEN 3: THE MIDDLE GENERATION
-  ═══════════════════════════════ -->
-  <section class="gen" aria-labelledby="gen3-heading">
-    <div class="gen__hd">
-      <span style="color:var(--c3)" class="gen__label">Generation 3 — the Israeli generation</span>
-      <div class="gen__line"></div>
-      <span class="gen__count">Born in Israel, Ukraine &amp; Moldova</span>
-    </div>
-    <div class="pgrid-wrap">
-      <button class="pgrid-arrow pgrid-arrow--prev hidden" onclick="scrollRow('gen3-row',-1)" aria-label="Scroll left">&#8249;</button>
-      <div class="pgrid" id="gen3-row">
-
-      <article class="pcard" id="gabi-flynn" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av1" aria-hidden="true"></div>
-        <span class="pcard__era">Second Israel generation · Mid 1900s</span>
-        <h3 itemprop="name">Gabi Flynn</h3>
-        <p class="pcard__sub">Flynn family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Ramat Gan, Israel</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🏠</span><span>Settled: Rishon LeTsiyon, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/gabi_flynn" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="naomi-averbuch" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true"></div>
-        <span class="pcard__era">Second Israel generation · Mid 1900s</span>
-        <h3 itemprop="name">Naomi Averbuch (Flynn Arkin)</h3>
-        <p class="pcard__sub">Averbuch family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Tel Aviv-Yafo, Israel</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Rishon LeTsiyon, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/naomi_%D7%90%D7%95%D7%95%D7%A8%D7%91%D7%95%D7%9A" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="aryeh-volchinsky" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true"></div>
-        <span class="pcard__era">Second Israel generation · Mid 1900s</span>
-        <h3 itemprop="name">Aryeh (Lonya) Yaron Volchinsky</h3>
-        <p class="pcard__sub">Volchinsky family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Kherson, Russia</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Ichilov Hospital, Tel Aviv</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%90%D7%A8%D7%99%D7%94_%D7%99%D7%A8%D7%95%D7%9F" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="rachel-himelfarb" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true"></div>
-        <span class="pcard__era">Second Israel generation · Mid 1900s</span>
-        <h3 itemprop="name">Rachel (Raya) Himelfarb</h3>
-        <p class="pcard__sub">Himelfarb family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Odesa, Ukraine</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Holon, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%A8%D7%97%D7%9C_%D7%94%D7%99%D7%9E%D7%9C%D7%A4%D7%A8%D7%91" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="tzonya-berniskai" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true"></div>
-        <span class="pcard__era">Second Israel generation · Mid 1900s</span>
-        <h3 itemprop="name">Tzonya (Tzvia) Berniskai (Averbuch)</h3>
-        <p class="pcard__sub">Berniskai family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Smila, Ukraine</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Ramat Efal, Ramat Gan</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%A6%D7%95%D7%A0%D7%99%D7%94_%D7%91%D7%A8%D7%A0%D7%99%D7%A1%D7%A7%D7%99" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="ora-sinyaver" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av5" aria-hidden="true"></div>
-        <span class="pcard__era">Second Israel generation · Mid 1900s</span>
-        <h3 itemprop="name">Ora Sinyaver (Reifman)</h3>
-        <p class="pcard__sub">Sinyaver family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Tel Aviv-Yafo, Israel</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🪦</span><span>Died: Ramat Gan, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%90%D7%95%D7%A8%D7%94_%D7%A1%D7%99%D7%A0%D7%99%D7%90%D7%91%D7%A8" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="sonia-barankin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true"></div>
-        <span class="pcard__era">Second Israel generation · Mid 1900s</span>
-        <h3 itemprop="name">Sonia Barankin (Karni)</h3>
-        <p class="pcard__sub">Barankin family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Oman / Okraina</span></div>
-          <div class="pcard__fact"><span class="pcard__fact-icon">🏠</span><span>Settled: Ramat HaShofet, Israel</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/sonia_barankin" itemprop="url">View full profile</a>
-      </article>
-
-      <article class="pcard" id="yehuda-karni" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true"></div>
-        <span class="pcard__era">Second Israel generation · Mid 1900s</span>
-        <h3 itemprop="name">Yehuda Karni</h3>
-        <p class="pcard__sub">Karni family</p>
-        <div class="pcard__facts">
-          <div class="pcard__fact"><span class="pcard__fact-icon">❄</span><span>Born : Lithuania</span></div>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/yehuda_karni" itemprop="url">View full profile</a>
-      </article>
-
-      </div><!-- /pgrid gen3 -->
-      <button class="pgrid-arrow pgrid-arrow--next" onclick="scrollRow('gen3-row',1)" aria-label="Scroll right">&#8250;</button>
-    </div><!-- /pgrid-wrap -->
-  </section><!-- /gen3 -->
-
-
-  <!-- CTA SECTION — styled like MyHeritage "Embark on a journey" -->
-  <section class="cta-section" aria-labelledby="cta-heading">
-    <h2 id="cta-heading">Embark on a fascinating journey to discover your family history</h2>
-    <div class="cta-cards">
-
-      <div class="cta-card">
-        <div class="cta-card__icon">🌳</div>
-        <h3>Explore the family tree</h3>
-        <p>Navigate the full interactive Zaik family tree. Zoom in on any branch, view individual profiles, and explore 119 recorded people across multiple generations.</p>
-        <button class="cta-card__btn cta-card__btn--filled" onclick="switchView('tree')">View family tree</button>
       </div>
+      <button class="htl-btn htl-btn--next" id="htl-next" onclick="scrollHtl2(1)" aria-label="Scroll right">&#8250;</button>
+    </div>
 
-      <div class="cta-card">
-        <div class="cta-card__icon">🧬</div>
-        <h3>Discover what makes you unique</h3>
-        <p>Reveal your ethnic origins and find relatives you never knew existed with MyHeritage's simple DNA kit.</p>
-        <a class="cta-card__btn cta-card__btn--outline" href="https://www.myheritage.com/dna" target="_blank" rel="noopener">Order now</a>
-      </div>
-
-      <div class="cta-card">
-        <div class="cta-card__icon">🔍</div>
-        <h3>Search billions of records</h3>
-        <p>Dive into MyHeritage's international collection of 39.6 billion historical records. Start with a name and see what our collections can reveal.</p>
-        <a class="cta-card__btn cta-card__btn--outline" href="https://www.myheritage.com/research" target="_blank" rel="noopener">Search records</a>
-      </div>
-
+    <div class="htl-legend">
+      <span><b style="background:#0d6b54"></b>Migration event</span>
+      <span><b style="background:var(--text-3)"></b>Birth / settlement</span>
     </div>
   </section>
 
@@ -1833,7 +1957,7 @@
   function scrollHtl2(dir) {
     var w = document.getElementById('htl-wrap');
     if (!w) return;
-    w.scrollBy({left: dir * 180 * 3, behavior: 'smooth'});
+    w.scrollBy({left: dir * 200 * 3, behavior: 'smooth'});
     setTimeout(function(){ updHtl(); }, 350);
   }
   function updHtl() {
