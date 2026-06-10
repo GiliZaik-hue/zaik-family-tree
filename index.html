@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zaik Family Tree — A Jewish Family from Odessa to Israel | MyHeritage</title>
-  <meta name="description" content="Explore the Zaik family history: a Jewish family rooted in Odessa, Tiraspol, and Lithuania who became pioneers in Rishon LeTsiyon, Israel. 119 people recorded across multiple generations." />
+  <meta name="description" content="Explore the Zaik family history: a Jewish family rooted in Odessa, Tiraspol, and Lithuania who became pioneers in Rishon LeTsiyon, Israel. Over 100 people recorded across 5 generations." />
 
   <!-- ============================================================
        JSON-LD STRUCTURED DATA
@@ -129,7 +129,181 @@
       --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ── BRANCH SUMMARY STRIP ── */
+    .branch-strip {
+      margin-bottom: 40px;
+    }
+    .branch-strip__label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 14px;
+    }
+    .branch-strip__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .branch-pill {
+      border: 1px solid; border-radius: var(--r-lg);
+      padding: 14px 16px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .branch-pill__name {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.02em;
+    }
+    .branch-pill__route {
+      font-size: 12px; font-weight: 600; color: var(--text-1);
+    }
+    .branch-pill__desc {
+      font-size: 12px; color: var(--text-2); line-height: 1.5; margin-top: 2px;
+    }
+    .branch-pill__links {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
+      padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    .branch-pill__link {
+      font-size: 11px; font-weight: 600; text-decoration: none;
+      opacity: 0.85; transition: opacity 0.15s;
+    }
+    .branch-pill__link:hover { opacity: 1; text-decoration: underline; }
+
+    /* ── CIRCULAR AVATAR UPGRADE ── */
+    .pcard__av {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; margin-bottom: 12px;
+      letter-spacing: 0.03em;
+      box-shadow: 0 0 0 3px var(--surface), 0 0 0 4px currentColor;
+    }
+
+
+    /* ── PEOPLE IN THIS TREE ── */
+    .people-section { margin-bottom: 48px; }
+    .people-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .person-bubble {
+      display: flex; flex-direction: column;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 100px; padding: 9px 18px;
+      text-decoration: none;
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+    }
+    .person-bubble:hover {
+      border-color: var(--c1);
+      box-shadow: 0 2px 12px rgba(13,107,84,0.12);
+      transform: translateY(-1px);
+    }
+    .person-bubble__name { font-size: 13px; font-weight: 600; color: var(--text-1); white-space: nowrap; }
+    .person-bubble__cta { font-size: 10px; color: var(--c1); font-weight: 500; margin-top: 1px; }
+
+    /* ── ZAIK TREES CAROUSEL ── */
+    .zaik-trees { margin-bottom: 44px; }
+    .zaik-trees__outer { position: relative; padding: 0 36px; }
+    .zaik-trees__scroll {
+      display: flex; gap: 12px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      padding: 4px 2px 8px;
+    }
+    .zaik-trees__scroll::-webkit-scrollbar { display: none; }
+    .zaik-trees__btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border-md);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 5; font-size: 18px;
+      color: var(--text-2); box-shadow: 0 1px 6px rgba(0,0,0,.1);
+      transition: background .15s, opacity .2s;
+    }
+    .zaik-trees__btn:hover { background: var(--bg); }
+    .zaik-trees__btn--prev { left: 0; }
+    .zaik-trees__btn--next { right: 0; }
+    .zaik-trees__btn.hidden { opacity: 0; pointer-events: none; }
+    .ztcard {
+      flex: 0 0 220px; scroll-snap-align: start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 18px 16px;
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none;
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+    }
+    .ztcard:hover {
+      border-color: var(--c1);
+      box-shadow: 0 4px 16px rgba(13,107,84,.1);
+      transform: translateY(-2px);
+    }
+    .ztcard__avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .ztcard__body { flex: 1; min-width: 0; }
+    .ztcard__name { font-size: 13px; font-weight: 700; color: var(--text-1); margin-bottom: 3px; }
+    .ztcard__meta { font-size: 11px; color: var(--text-3); margin-bottom: 6px; }
+    .ztcard__cta { font-size: 11px; font-weight: 600; color: var(--c1); }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: #fdf6f0;
+      border-radius: var(--r-lg);
+      padding: 48px 32px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: var(--font-body);
+      font-size: 22px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 32px;
+      max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.3;
+    }
+    .cta-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; text-align: left;
+    }
+    .cta-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 24px 22px;
+      display: flex; flex-direction: column;
+    }
+    .cta-card__icon {
+      font-size: 32px; margin-bottom: 14px;
+    }
+    .cta-card h3 {
+      font-size: 15px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 10px; line-height: 1.3;
+    }
+    .cta-card p {
+      font-size: 13px; color: var(--text-2);
+      line-height: 1.65; margin-bottom: 20px; flex: 1;
+    }
+    .cta-card__btn {
+      display: inline-block; text-align: center;
+      padding: 10px 20px; border-radius: 100px;
+      font-size: 13px; font-weight: 600;
+      font-family: var(--font-ui);
+      cursor: pointer; text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+      border: none; margin-top: auto;
+    }
+    .cta-card__btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .cta-card__btn--filled {
+      background: #e8622a; color: #fff;
+    }
+    .cta-card__btn--outline {
+      background: transparent; color: #e8622a;
+      border: 1.5px solid #e8622a;
+    }
+
+    /* ── RESPONSIVE ADDITIONS ── */
+    @media (max-width: 620px) {
+      .branch-strip__grid { grid-template-columns: 1fr 1fr; }
+      .cta-section { padding: 32px 16px; }
+      .cta-cards { grid-template-columns: 1fr; }
+    }
+
+    /* ── EXISTING STYLES ── */
     body { font-family: var(--font-ui); background: var(--bg); color: var(--text-1); line-height: 1.6; }
 
     /* ── TOOLBAR ── */
@@ -186,28 +360,117 @@
       max-width: 960px; margin: 0 auto; padding: 40px 24px 80px;
     }
 
-    /* ── HERO ── */
-    .hero { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
-    .hero__tag {
-      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--c1); font-weight: 700; margin-bottom: 10px;
-      display: flex; align-items: center; gap: 8px;
+    /* ── HERO — editorial style ── */
+    .hero {
+      text-align: center;
+      padding: 56px 24px 44px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+      background: var(--surface);
     }
-    .hero__tag::before { content:''; display:inline-block; width:20px; height:2px; background:var(--c1); border-radius:2px; }
+    .hero__eyebrow {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--c1); margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+    }
+    .hero__eyebrow::before, .hero__eyebrow::after {
+      content: ''; width: 36px; height: 1px;
+      background: var(--c1); border-radius: 2px; opacity: 0.6;
+    }
     .hero h1 {
       font-family: var(--font-body);
-      font-size: 30px; font-weight: 700; line-height: 1.2;
-      color: var(--text-1); margin-bottom: 14px;
+      font-size: clamp(34px, 5.5vw, 54px);
+      font-weight: 700; line-height: 1.15;
+      color: var(--text-1);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
     }
-    .hero__lead { font-size: 15px; color: var(--text-2); line-height: 1.75; max-width: 720px; }
+    .hero__chronicle {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: clamp(14px, 2vw, 18px);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      color: #e8622a;
+      background: linear-gradient(135deg, #e8622a 0%, #f5874f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero__divider {
+      width: 40px; height: 2px;
+      background: var(--c1); border-radius: 2px;
+      margin: 0 auto 22px; opacity: 0.5;
+    }
+    .hero__lead {
+      font-size: 14px; color: var(--text-2);
+      line-height: 1.85; max-width: 580px;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
+    .hero__stats {
+      display: flex; justify-content: center;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .hero__stat {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 12px 20px;
+      text-align: left; min-width: 90px;
+    }
+    .hero__stat-n { font-size: 22px; font-weight: 700; color: var(--text-1); line-height: 1; }
+    .hero__stat-l { font-size: 11px; color: var(--text-3); margin-top: 4px; }
 
-    .stats { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
-    .stat {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-md); padding: 10px 18px;
+    /* ── CHRONICLE SEARCH BAR ── */
+    .chronicle-search {
+      max-width: 860px; margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      text-align: left;
     }
-    .stat__n { font-size: 20px; font-weight: 700; color: var(--text-1); line-height: 1; }
-    .stat__l { font-size: 11px; color: var(--text-3); margin-top: 3px; }
+    .chronicle-search__label {
+      font-size: 12px; color: var(--text-3);
+      margin-bottom: 10px;
+    }
+    .chronicle-search__bar {
+      display: flex; align-items: center;
+      gap: 0; border: 1px solid var(--border-md);
+      border-radius: var(--r-md); overflow: hidden;
+      background: var(--surface);
+    }
+    .chronicle-search__input {
+      flex: 1; border: none; outline: none;
+      padding: 11px 14px; font-size: 13px;
+      font-family: var(--font-ui); color: var(--text-1);
+      background: transparent; min-width: 0;
+    }
+    .chronicle-search__input--sm { flex: 0.6; }
+    .chronicle-search__input::placeholder { color: var(--text-3); }
+    .chronicle-search__divider {
+      width: 1px; height: 28px; background: var(--border-md); flex-shrink: 0;
+    }
+    .chronicle-search__btn {
+      background: #e8622a; color: #fff;
+      border: none; padding: 11px 22px;
+      font-size: 13px; font-weight: 700;
+      font-family: var(--font-ui); cursor: pointer;
+      white-space: nowrap; flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .chronicle-search__btn:hover { background: #c9501e; }
+
+    @media (max-width: 640px) {
+      .chronicle-search__bar { flex-wrap: wrap; }
+      .chronicle-search__input { flex: 1 1 45%; }
+      .chronicle-search__divider { display: none; }
+      .chronicle-search__btn { width: 100%; padding: 12px; }
+    }
 
     /* ── MIGRATION BANNER ── */
     .migration {
@@ -241,64 +504,134 @@
       border-radius: 20px; padding: 2px 10px; white-space: nowrap;
     }
 
-    /* ── PERSON CARDS GRID ── */
-    .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+    /* ── PERSON CARDS ROW (horizontal scroll) ── */
+    .gen { position: relative; margin-bottom: 44px; }
+    .pgrid-wrap { position: relative; padding: 0 20px; }
+    .pgrid {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .pgrid::-webkit-scrollbar { display: none; }
+    .pgrid .pcard {
+      flex: 0 0 200px;
+      scroll-snap-align: start;
+    }
 
-    /* ── PERSON CARD ── */
+    /* scroll arrows */
+    .pgrid-arrow {
+      position: absolute; top: 50%; transform: translateY(-60%);
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #e8622a; color: #fff; border: none;
+      font-size: 20px; cursor: pointer; z-index: 5;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: background 0.15s, opacity 0.2s;
+      line-height: 1;
+    }
+    .pgrid-arrow:hover { background: #c9501e; }
+    .pgrid-arrow--prev { left: -4px; }
+    .pgrid-arrow--next { right: -4px; }
+    .pgrid-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    /* ── PERSON CARD — centered photo style ── */
     .pcard {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 16px 18px;
+      border-radius: var(--r-lg); padding: 24px 18px 18px;
       transition: border-color 0.15s, box-shadow 0.15s;
-      display: flex; flex-direction: column;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
     }
-    .pcard .plink { margin-top: 0; }
-    .pcard:hover { border-color: var(--border-md); box-shadow: 0 2px 14px rgba(0,0,0,0.06); }
-    .pcard--subject { border-left: 3px solid var(--c1); }
-    .pcard--diaspora { border-left: 3px solid var(--c4); }
+    .pcard:hover { border-color: var(--border-md); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .pcard--subject {}
+    .pcard--diaspora {}
 
+    /* Large circular photo placeholder */
     .pcard__av {
-      width: 38px; height: 38px; border-radius: 50%;
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #2c2825;
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700; margin-bottom: 12px;
-      letter-spacing: 0.03em;
+      margin-bottom: 14px; flex-shrink: 0; overflow: hidden;
+      position: relative;
     }
-    .av1 { background: var(--c1-bg); color: var(--c1); }
-    .av2 { background: var(--c2-bg); color: var(--c2); }
-    .av3 { background: var(--c3-bg); color: var(--c3); }
-    .av4 { background: var(--c4-bg); color: var(--c4); }
-    .av5 { background: var(--c5-bg); color: var(--c5); }
-
-    .pcard h3 { font-size: 14px; font-weight: 600; color: var(--text-1); margin-bottom: 2px; }
-    .pcard__sub { font-size: 12px; color: var(--text-3); margin-bottom: 9px; }
-    .pcard__bio { font-size: 13px; color: var(--text-2); line-height: 1.65; margin-bottom: 9px; }
-
-    .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 11px; margin-top: auto; }
-    .pcard .pcard__bio { margin-bottom: 9px; }
-    .tag {
-      font-size: 11px; padding: 2px 7px;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 20px; color: var(--text-2);
+    .pcard__av::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 44px; height: 48px;
+      background: #4a433d;
+      border-radius: 50% 50% 0 0;
     }
-    .tag--loc::before { content: '📍 '; font-size: 10px; }
-    .tag--occ::before { content: '◆ '; font-size: 8px; }
+    .pcard__av::before {
+      content: '';
+      position: absolute; bottom: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 22px; height: 22px;
+      background: #4a433d;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    /* Hide old initials text */
+    .pcard__av span { display: none; }
+    .av1,.av2,.av3,.av4,.av5 { background: #2c2825; color: transparent; }
+
+    .pcard__era {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 8px; display: block;
+    }
+    .pcard h3 {
+      font-size: 14px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 3px;
+      line-height: 1.3;
+    }
+    .pcard__sub {
+      font-size: 12px; color: var(--text-3);
+      margin-bottom: 14px; line-height: 1.4;
+    }
+
+    /* Fact rows with icons */
+    .pcard__facts {
+      width: 100%; display: flex; flex-direction: column;
+      gap: 6px; margin-bottom: 14px; text-align: left;
+    }
+    .pcard__fact {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12px; color: var(--text-2); line-height: 1.4;
+    }
+    .pcard__fact-icon {
+      font-size: 12px; flex-shrink: 0; margin-top: 1px; opacity: 0.7;
+    }
+
+    /* Remove old bio/tags styles from cards */
+    .pcard .pcard__bio { display: none; }
+    .pcard .tags { display: none; }
 
     .plink {
-      font-size: 12px; color: var(--accent); font-weight: 500;
-      text-decoration: none;
+      font-size: 12px; color: var(--text-1); font-weight: 500;
+      text-decoration: underline; text-underline-offset: 2px;
       display: inline-flex; align-items: center; gap: 3px;
+      margin-top: auto;
     }
-    .plink:hover { text-decoration: underline; }
+    .plink:hover { color: var(--accent); }
 
     /* ── BRANCH STORIES ── */
-    .branch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; }
+    .branch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; align-items: stretch; }
     .branch {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--r-lg); padding: 20px 22px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
     }
-    .branch__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
-    .branch h2 { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-1); }
-    .branch p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 8px; }
-    .branch p:last-child { margin-bottom: 0; }
+    .branch__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; align-self: start; }
+    .branch h2 { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-1); align-self: start; }
+    .branch p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 0; }
+    .branch__cta { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; align-self: end; }
+    .branch__cta:hover { text-decoration: underline; }
 
     /* ── MODERN GEN LIST ── */
     .modern-list { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -308,12 +641,615 @@
       font-size: 13px; color: var(--text-2);
     }
 
-    /* ── RESPONSIVE ── */
+    /* ── IMMIGRATION + MIGRATION TWO-COLUMN ── */
+    .immig-section { margin-bottom: 48px; }
+    .immig-two-col {
+      width: 100%;
+    }
+    .immig-left { width: 100%; }
+    .immig-migration-text {
+      padding: 20px 0 0;
+    }
+    .immig-migration-text h2 {
+      font-family: var(--font-body);
+      font-size: 15px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .immig-migration-text p {
+      font-size: 13px; color: var(--text-2);
+      line-height: 1.8; margin-bottom: 10px;
+    }
+    .immig-migration-text p:last-child { margin-bottom: 0; }
+    .immig-migration-text strong { color: var(--text-1); }
+
+    /* ── BAR CHART ── */
+    .immig-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .immig-bars {
+      padding: 24px 28px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .immig-bar-row { display: flex; flex-direction: column; gap: 6px; }
+    .immig-bar-label { display: flex; justify-content: space-between; align-items: baseline; }
+    .immig-bar-country { font-size: 13px; font-weight: 500; color: var(--text-1); }
+    .immig-bar-count { font-size: 13px; color: var(--text-2); font-weight: 400; }
+    .immig-bar-track {
+      height: 8px; background: #eef0ee;
+      border-radius: 4px; overflow: hidden;
+    }
+    .immig-bar-fill { height: 100%; border-radius: 4px; }
+    .htl-section { margin-bottom: 48px; }
+    .htl-outer { position: relative; padding: 0 40px; }
+    .htl-scroll {
+      overflow-x: auto; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .htl-scroll::-webkit-scrollbar { display: none; }
+    .htl-track {
+      display: flex; align-items: flex-start;
+      min-width: max-content;
+      padding: 72px 0 40px;
+      position: relative; gap: 12px;
+    }
+    .htl-track::before {
+      content: ''; position: absolute;
+      left: 0; right: 0; top: 22px;
+      height: 2px; background: var(--border-md);
+    }
+    .htl-item {
+      display: flex; flex-direction: column; align-items: center;
+      width: 200px; flex-shrink: 0; padding: 0 10px;
+      position: relative;
+    }
+    .htl-item:hover .htl-card {
+      border-color: var(--border-md);
+      background: var(--bg);
+    }
+    .htl-pin {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--text-3);
+      border: 2.5px solid var(--surface);
+      position: absolute; top: 16px; z-index: 2;
+      transition: transform .15s;
+    }
+    .htl-item:hover .htl-pin { transform: scale(1.5); }
+    .htl-pin--migrate { background: #0d6b54; }
+    .htl-connector {
+      position: absolute; top: 22px; left: 50%;
+      width: 1.5px; height: 40px;
+      background: var(--border);
+      z-index: 1;
+    }
+    .htl-connector--migrate { background: rgba(13,107,84,0.3); }
+    .htl-spacer { height: 62px; }
+    .htl-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 14px 14px;
+      width: 100%;
+      min-height: 110px;
+      display: flex; flex-direction: column;
+      transition: border-color .15s, background .15s;
+    }
+    .htl-card--dashed { border-style: dashed; }
+    .htl-badge {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      color: #0d6b54; border: 0.5px solid #0d6b54;
+      border-radius: 4px; padding: 1px 6px;
+      margin-bottom: 6px; letter-spacing: .02em;
+      align-self: flex-start;
+    }
+    .htl-era {
+      font-size: 10px; color: var(--text-3);
+      margin-bottom: 4px; letter-spacing: .03em;
+    }
+    .htl-name {
+      font-size: 12px; font-weight: 600; color: var(--text-1);
+      line-height: 1.4; margin-bottom: 5px;
+    }
+    .htl-sub {
+      font-size: 11px; color: var(--text-3);
+      line-height: 1.5; margin-top: auto;
+    }
+    .htl-btn {
+      position: absolute; top: 10px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border-md);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10; font-size: 16px;
+      color: var(--text-2);
+      transition: background .15s, opacity .2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .htl-btn:hover { background: var(--bg); }
+    .htl-btn--prev { left: 4px; }
+    .htl-btn--next { right: 4px; }
+    .htl-btn.hidden { opacity: 0; pointer-events: none; }
+    .htl-legend {
+      display: flex; gap: 20px;
+      padding: 12px 0 0; font-size: 11px; color: var(--text-3);
+    }
+    .htl-legend span { display: flex; align-items: center; gap: 6px; }
+    .htl-legend b {
+      width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+    }
+
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: #fdf6f0;
+      border-radius: var(--r-lg);
+      padding: 48px 32px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: var(--font-body);
+      font-size: 22px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 32px;
+      max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.3;
+    }
+    .cta-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; text-align: left;
+    }
+    .cta-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 24px 22px;
+      display: flex; flex-direction: column;
+    }
+    .cta-card__icon {
+      font-size: 32px; margin-bottom: 14px;
+    }
+    .cta-card h3 {
+      font-size: 15px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 10px; line-height: 1.3;
+    }
+    .cta-card p {
+      font-size: 13px; color: var(--text-2);
+      line-height: 1.65; margin-bottom: 20px; flex: 1;
+    }
+    .cta-card__btn {
+      display: inline-block; text-align: center;
+      padding: 10px 20px; border-radius: 100px;
+      font-size: 13px; font-weight: 600;
+      font-family: var(--font-ui);
+      cursor: pointer; text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+      border: none; margin-top: auto;
+    }
+    .cta-card__btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .cta-card__btn--filled {
+      background: #e8622a; color: #fff;
+    }
+    .cta-card__btn--outline {
+      background: transparent; color: #e8622a;
+      border: 1.5px solid #e8622a;
+    }
+
+    /* ── RESPONSIVE ADDITIONS ── */
     @media (max-width: 620px) {
+      .branch-strip__grid { grid-template-columns: 1fr 1fr; }
+      .cta-section { padding: 32px 16px; }
+      .cta-cards { grid-template-columns: 1fr; }
+    }
+
+    /* ── EXISTING STYLES ── */
+    body { font-family: var(--font-ui); background: var(--bg); color: var(--text-1); line-height: 1.6; }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 24px; gap: 12px; flex-wrap: wrap;
+    }
+    .toolbar__crumb { font-size: 13px; color: var(--text-2); }
+    .toolbar__crumb strong { color: var(--text-1); font-weight: 600; }
+    .toolbar__meta { font-size: 12px; color: var(--text-3); }
+
+    .vtoggle {
+      display: flex;
+      border: 1px solid var(--border-md);
+      border-radius: var(--r-md);
+      overflow: hidden;
+    }
+    .vtoggle__btn {
+      padding: 8px 20px; font-size: 13px; font-weight: 500;
+      font-family: var(--font-ui);
+      cursor: pointer; background: transparent; border: none;
+      color: var(--text-2);
+      display: flex; align-items: center; gap: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .vtoggle__btn:hover { background: rgba(0,0,0,0.04); }
+    .vtoggle__btn.is-active {
+      background: var(--surface); color: var(--text-1);
+      box-shadow: inset 0 0 0 1px var(--border-md);
+    }
+    .vtoggle__btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ── VIEW PANELS ── */
+    /* SEO-safe hide: content stays in DOM, just visually removed */
+    .view.is-hidden {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+
+    /* ── TREE PLACEHOLDER ── */
+    .tree-placeholder {
+      height: 480px; display: flex; align-items: center;
+      justify-content: center; flex-direction: column; gap: 10px;
+      background: #f2f1ed; color: var(--text-3); font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tree-placeholder__icon { font-size: 36px; opacity: 0.35; }
+
+    /* ── NARRATIVE CONTAINER ── */
+    #view-narrative {
+      max-width: 960px; margin: 0 auto; padding: 40px 24px 80px;
+    }
+
+    /* ── HERO — editorial style ── */
+    .hero {
+      text-align: center;
+      padding: 56px 24px 44px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+      background: var(--surface);
+    }
+    .hero__eyebrow {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--c1); margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+    }
+    .hero__eyebrow::before, .hero__eyebrow::after {
+      content: ''; width: 36px; height: 1px;
+      background: var(--c1); border-radius: 2px; opacity: 0.6;
+    }
+    .hero h1 {
+      font-family: var(--font-body);
+      font-size: clamp(34px, 5.5vw, 54px);
+      font-weight: 700; line-height: 1.15;
+      color: var(--text-1);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .hero__chronicle {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: clamp(14px, 2vw, 18px);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      color: #e8622a;
+      background: linear-gradient(135deg, #e8622a 0%, #f5874f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero__divider {
+      width: 40px; height: 2px;
+      background: var(--c1); border-radius: 2px;
+      margin: 0 auto 22px; opacity: 0.5;
+    }
+    .hero__lead {
+      font-size: 14px; color: var(--text-2);
+      line-height: 1.85; max-width: 580px;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
+    .hero__stats {
+      display: flex; justify-content: center;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .hero__stat {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 12px 20px;
+      text-align: left; min-width: 90px;
+    }
+    .hero__stat-n { font-size: 22px; font-weight: 700; color: var(--text-1); line-height: 1; }
+    .hero__stat-l { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+
+    /* ── CHRONICLE SEARCH BAR ── */
+    .chronicle-search {
+      max-width: 860px; margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      text-align: left;
+    }
+    .chronicle-search__label {
+      font-size: 12px; color: var(--text-3);
+      margin-bottom: 10px;
+    }
+    .chronicle-search__bar {
+      display: flex; align-items: center;
+      gap: 0; border: 1px solid var(--border-md);
+      border-radius: var(--r-md); overflow: hidden;
+      background: var(--surface);
+    }
+    .chronicle-search__input {
+      flex: 1; border: none; outline: none;
+      padding: 11px 14px; font-size: 13px;
+      font-family: var(--font-ui); color: var(--text-1);
+      background: transparent; min-width: 0;
+    }
+    .chronicle-search__input--sm { flex: 0.6; }
+    .chronicle-search__input::placeholder { color: var(--text-3); }
+    .chronicle-search__divider {
+      width: 1px; height: 28px; background: var(--border-md); flex-shrink: 0;
+    }
+    .chronicle-search__btn {
+      background: #e8622a; color: #fff;
+      border: none; padding: 11px 22px;
+      font-size: 13px; font-weight: 700;
+      font-family: var(--font-ui); cursor: pointer;
+      white-space: nowrap; flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .chronicle-search__btn:hover { background: #c9501e; }
+
+    @media (max-width: 640px) {
+      .chronicle-search__bar { flex-wrap: wrap; }
+      .chronicle-search__input { flex: 1 1 45%; }
+      .chronicle-search__divider { display: none; }
+      .chronicle-search__btn { width: 100%; padding: 12px; }
+    }
+
+    /* ── MIGRATION BANNER ── */
+    .migration {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--c1);
+      border-radius: 0 var(--r-lg) var(--r-lg) 0;
+      padding: 22px 26px; margin-bottom: 36px;
+    }
+    .migration h2 {
+      font-family: var(--font-body); font-size: 17px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 10px;
+    }
+    .migration p { font-size: 14px; color: var(--text-2); line-height: 1.75; margin-bottom: 10px; }
+    .migration p:last-child { margin-bottom: 0; }
+    .migration strong { color: var(--text-1); }
+
+    /* ── GENERATION SECTION ── */
+    .gen { margin-bottom: 40px; }
+    .gen__hd {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+    }
+    .gen__label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .gen__line { flex: 1; height: 1px; background: var(--border); }
+    .gen__count {
+      font-size: 11px; color: var(--text-3);
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2px 10px; white-space: nowrap;
+    }
+
+    /* ── PERSON CARDS ROW (horizontal scroll) ── */
+    .gen { position: relative; margin-bottom: 44px; }
+    .pgrid-wrap { position: relative; padding: 0 20px; }
+    .pgrid {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .pgrid::-webkit-scrollbar { display: none; }
+    .pgrid .pcard {
+      flex: 0 0 200px;
+      scroll-snap-align: start;
+    }
+
+    /* scroll arrows */
+    .pgrid-arrow {
+      position: absolute; top: 50%; transform: translateY(-60%);
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #e8622a; color: #fff; border: none;
+      font-size: 20px; cursor: pointer; z-index: 5;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: background 0.15s, opacity 0.2s;
+      line-height: 1;
+    }
+    .pgrid-arrow:hover { background: #c9501e; }
+    .pgrid-arrow--prev { left: -4px; }
+    .pgrid-arrow--next { right: -4px; }
+    .pgrid-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    /* ── PERSON CARD — centered photo style ── */
+    .pcard {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 24px 18px 18px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+    }
+    .pcard:hover { border-color: var(--border-md); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .pcard--subject {}
+    .pcard--diaspora {}
+
+    /* Large circular photo placeholder */
+    .pcard__av {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #2c2825;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px; flex-shrink: 0; overflow: hidden;
+      position: relative;
+    }
+    .pcard__av::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 44px; height: 48px;
+      background: #4a433d;
+      border-radius: 50% 50% 0 0;
+    }
+    .pcard__av::before {
+      content: '';
+      position: absolute; bottom: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 22px; height: 22px;
+      background: #4a433d;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    /* Hide old initials text */
+    .pcard__av span { display: none; }
+    .av1,.av2,.av3,.av4,.av5 { background: #2c2825; color: transparent; }
+
+    .pcard__era {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 8px; display: block;
+    }
+    .pcard h3 {
+      font-size: 14px; font-weight: 700;
+      color: var(--text-1); margin-bottom: 3px;
+      line-height: 1.3;
+    }
+    .pcard__sub {
+      font-size: 12px; color: var(--text-3);
+      margin-bottom: 14px; line-height: 1.4;
+    }
+
+    /* Fact rows with icons */
+    .pcard__facts {
+      width: 100%; display: flex; flex-direction: column;
+      gap: 6px; margin-bottom: 14px; text-align: left;
+    }
+    .pcard__fact {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12px; color: var(--text-2); line-height: 1.4;
+    }
+    .pcard__fact-icon {
+      font-size: 12px; flex-shrink: 0; margin-top: 1px; opacity: 0.7;
+    }
+
+    /* Remove old bio/tags styles from cards */
+    .pcard .pcard__bio { display: none; }
+    .pcard .tags { display: none; }
+
+    .plink {
+      font-size: 12px; color: var(--text-1); font-weight: 500;
+      text-decoration: underline; text-underline-offset: 2px;
+      display: inline-flex; align-items: center; gap: 3px;
+      margin-top: auto;
+    }
+    .plink:hover { color: var(--accent); }
+
+    /* ── BRANCH STORIES ── */
+    .branch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; align-items: stretch; }
+    .branch {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 20px 22px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+    }
+    .branch__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; align-self: start; }
+    .branch h2 { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-1); align-self: start; }
+    .branch p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 0; }
+    .branch__cta { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; align-self: end; }
+    .branch__cta:hover { text-decoration: underline; }
+
+    /* ── MODERN GEN LIST ── */
+    .modern-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .modern-chip {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 5px 12px;
+      font-size: 13px; color: var(--text-2);
+    }
+
+    /* ── IMMIGRATION + MIGRATION TWO-COLUMN ── */
+    .immig-section { margin-bottom: 48px; }
+
+    /* timeline CSS moved to htl-section */
+    .timeline-title {
+      font-family: var(--font-body);
+      font-size: 28px; font-weight: 900;
+      color: var(--text-1); text-align: center;
+      margin-bottom: 40px; letter-spacing: -0.02em;
+    }
+    .vtl {
+      position: relative;
+      max-width: 700px; margin: 0 auto;
+      padding: 0 24px;
+    }
+    .vtl::before {
+      content: '';
+      position: absolute;
+      left: 50%; transform: translateX(-50%);
+      top: 0; bottom: 0;
+      width: 3px; background: #2c2825; border-radius: 2px;
+    }
+    .vtl-event {
+      display: grid;
+      grid-template-columns: 1fr 20px 1fr;
+      align-items: center;
+      margin-bottom: 40px;
+      position: relative;
+      min-height: 40px;
+    }
+    .vtl-year {
+      text-align: right;
+      padding-right: 28px;
+      font-size: clamp(20px, 3.5vw, 32px);
+      font-weight: 900;
+      color: #2c2825;
+      line-height: 1;
+      font-family: var(--font-body);
+    }
+    .vtl-dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: #2c2825;
+      justify-self: center;
+      z-index: 2;
+    }
+    .vtl-text {
+      padding-left: 28px;
+      font-size: 14px;
+      color: #2c2825;
+      line-height: 1.5;
+    }
+    .vtl-text strong { font-weight: 700; display: block; margin-bottom: 2px; }
+    .vtl-text em { font-size: 12px; color: var(--text-3); font-style: normal; display: block; }
+    @media (max-width: 500px) {
+      .vtl-year { font-size: 16px; padding-right: 16px; }
+      .vtl-text { font-size: 12px; padding-left: 16px; }
+    }
+
+
+
+    /* ── RESPONSIVE ── */
       .toolbar { padding: 8px 14px; }
       #view-narrative { padding: 22px 14px 50px; }
       .hero h1 { font-size: 23px; }
-      .pgrid, .branch-grid { grid-template-columns: 1fr; }
+      .pgrid, .branch-grid { gap: 10px; }
+      .pgrid .pcard { flex: 0 0 180px; }
     }
   </style>
 </head>
@@ -347,8 +1283,8 @@
   <!-- Replace this div with your existing tree iframe / canvas -->
   <div class="tree-placeholder">
     <span class="tree-placeholder__icon">🌳</span>
-    <span>Interactive family tree renders here</span>
-    <span style="font-size:12px">Design preview — the live tree canvas loads in the real MyHeritage page</span>
+    <span>Interactive family tree canvas</span>
+    <span style="font-size:12px">Your existing tree code renders here — unchanged</span>
   </div>
 </div>
 
@@ -362,8 +1298,10 @@
 
   <!-- H1 — primary keyword heading -->
   <header class="hero">
-    <p class="hero__tag">Family chronicle</p>
-    <h1>The Zaik family — a Jewish journey from Odessa and Tiraspol to the Land of Israel</h1>
+    <p class="hero__eyebrow">Family chronicle</p>
+    <h1>Gili Zaik family tree</h1>
+    <span class="hero__chronicle">Chronicle</span>
+    <div class="hero__divider"></div>
     <p class="hero__lead">
       A biographical record of the Zaik family and its connected branches spanning five generations.
       The family's story begins in the Jewish communities of <strong>Odessa</strong>,
@@ -371,527 +1309,323 @@
       to <strong>Rishon LeTsiyon</strong> and <strong>Tel Aviv</strong>, where they became
       part of the fabric of early Israeli society.
     </p>
-    <div class="stats" role="list" aria-label="Family tree statistics">
-      <div class="stat" role="listitem"><div class="stat__n">119</div><div class="stat__l">People recorded</div></div>
-      <div class="stat" role="listitem"><div class="stat__n">5</div><div class="stat__l">Generations</div></div>
-      <div class="stat" role="listitem"><div class="stat__n">9+</div><div class="stat__l">Family surnames</div></div>
-      <div class="stat" role="listitem"><div class="stat__n">4</div><div class="stat__l">Countries of origin</div></div>
+
+    <div class="hero__stats" role="list" aria-label="Family tree statistics">
+      <div class="hero__stat" role="listitem">
+        <div class="hero__stat-n">119</div>
+        <div class="hero__stat-l">People recorded</div>
+      </div>
+      <div class="hero__stat" role="listitem">
+        <div class="hero__stat-n">5</div>
+        <div class="hero__stat-l">Generations</div>
+      </div>
+      <div class="hero__stat" role="listitem">
+        <div class="hero__stat-n">9+</div>
+        <div class="hero__stat-l">Family surnames</div>
+      </div>
+      <div class="hero__stat" role="listitem">
+        <div class="hero__stat-n">4</div>
+        <div class="hero__stat-l">Countries of origin</div>
+      </div>
     </div>
+
   </header>
 
 
-  <!-- MIGRATION NARRATIVE — long-tail SEO text -->
-  <section class="migration" aria-labelledby="migration-heading">
-    <h2 id="migration-heading">The great migration: from the Pale of Settlement to Eretz Israel</h2>
-    <p>
-      The Zaik family's story is woven from the broader tapestry of
-      Jewish emigration from the Russian Empire. <strong>Aryeh Zaik</strong>, born in
-      <strong>Odessa, Ukraine</strong>, and his wife <strong>Lea Leika</strong>, born in
-      <strong>Tiraspol, Moldova</strong>, were among the families who made the journey to
-      <strong>Rishon LeTsiyon</strong> — one of the first modern Jewish settlements in Israel.
-    </p>
-    <p>
-      The connected Goldin family arrived from the Kovno Province of <strong>Lithuania</strong>,
-      with branches in Telsai, Keidan, and Vilna. The Gurevitch, Himelfarb, Volchinsky, Averbuch,
-      and Sinyaver families came from the Ukrainian cities of Odessa, Berdychiv, Kherson,
-      Mykolaiv, and Smila — part of the vast wave of Jewish aliyah that shaped modern Israel.
-      Some branches, like the Goldins, also sent family members westward to
-      <strong>Philadelphia</strong>, <strong>Baltimore</strong>, and <strong>Newport</strong>,
-      tracing the twin paths of Jewish emigration in that era.
-    </p>
-    <p>
-      The family put down roots in Israel — in
-      Rishon LeTsiyon, Tel Aviv, Ramat Gan, Rehovot, and Petah Tiqwa —
-      with the youngest generation growing up as native Israelis.
-    </p>
+  <!-- Migration narrative moved into immigration view section below -->
+
+
+
+  <!-- ═══════════════════════════════
+       IMMIGRATION VIEW
+  ═══════════════════════════════ -->
+  <!-- ═══════════════════════════════
+       IMMIGRATION VIEW
+  ═══════════════════════════════ -->
+  <!-- ═══════════════════════════════
+       IMMIGRATION VIEW + MIGRATION TEXT
+  ═══════════════════════════════ -->
+  <section class="immig-section" aria-labelledby="immig-heading">
+    <div class="gen__hd" style="margin-bottom:16px">
+      <h2 id="immig-heading" class="gen__label" style="color:var(--c2)">Immigration view — origins of the Zaik family tree</h2>
+      <div class="gen__line"></div>
+    </div>
+    <p style="font-size:12px;color:var(--text-3);margin-bottom:16px">Based on recorded birthplaces of people in the Gili Zaik family tree only.</p>
+
+    <div class="immig-two-col">
+
+      <!-- LEFT: bars only -->
+      <div class="immig-left">
+        <div class="immig-wrap">
+      <!-- LEFT: bar list -->
+      <div class="immig-bars">
+
+        <div class="immig-bar-row">
+          <div class="immig-bar-label">
+            <span class="immig-bar-country">Ukraine</span>
+            <span class="immig-bar-count">15</span>
+          </div>
+          <div class="immig-bar-track"><div class="immig-bar-fill" style="width:100%;background:#1a5e3a"></div></div>
+        </div>
+
+        <div class="immig-bar-row">
+          <div class="immig-bar-label">
+            <span class="immig-bar-country">Lithuania</span>
+            <span class="immig-bar-count">11</span>
+          </div>
+          <div class="immig-bar-track"><div class="immig-bar-fill" style="width:73%;background:#1a5e3a"></div></div>
+        </div>
+
+        <div class="immig-bar-row">
+          <div class="immig-bar-label">
+            <span class="immig-bar-country">Israel (born)</span>
+            <span class="immig-bar-count">11</span>
+          </div>
+          <div class="immig-bar-track"><div class="immig-bar-fill" style="width:73%;background:#2e8b57"></div></div>
+        </div>
+
+        <div class="immig-bar-row">
+          <div class="immig-bar-label">
+            <span class="immig-bar-country">Russia</span>
+            <span class="immig-bar-count">6</span>
+          </div>
+          <div class="immig-bar-track"><div class="immig-bar-fill" style="width:40%;background:#3aaa6a"></div></div>
+        </div>
+
+        <div class="immig-bar-row">
+          <div class="immig-bar-label">
+            <span class="immig-bar-country">USA (settled)</span>
+            <span class="immig-bar-count">4</span>
+          </div>
+          <div class="immig-bar-track"><div class="immig-bar-fill" style="width:27%;background:#5ec48a"></div></div>
+        </div>
+
+        <div class="immig-bar-row">
+          <div class="immig-bar-label">
+            <span class="immig-bar-country">Moldova</span>
+            <span class="immig-bar-count">1</span>
+          </div>
+          <div class="immig-bar-track"><div class="immig-bar-fill" style="width:7%;background:#9edcb8"></div></div>
+        </div>
+
+        <div class="immig-bar-row">
+          <div class="immig-bar-label">
+            <span class="immig-bar-country">England</span>
+            <span class="immig-bar-count">1</span>
+          </div>
+          <div class="immig-bar-track"><div class="immig-bar-fill" style="width:7%;background:#9edcb8"></div></div>
+        </div>
+
+        <div class="immig-bar-row">
+          <div class="immig-bar-label">
+            <span class="immig-bar-country">Belarus</span>
+            <span class="immig-bar-count">1</span>
+          </div>
+          <div class="immig-bar-track"><div class="immig-bar-fill" style="width:7%;background:#9edcb8"></div></div>
+        </div>
+
+      </div><!-- /immig-bars -->
+        </div><!-- /immig-wrap -->
+      </div><!-- /immig-left -->
+
+    </div><!-- /immig-two-col -->
+
+    <!-- Migration text below the bar card -->
+    <div class="immig-migration-text" aria-labelledby="migration-heading">
+      <h2 id="migration-heading" class="gen__label" style="color:var(--text-1);font-size:16px;font-weight:700;text-transform:none;letter-spacing:0;margin-bottom:14px">The great migration: from the Pale of Settlement to Eretz Israel</h2>
+      <p>
+        The Zaik family's story is woven from the broader tapestry of
+        Jewish emigration from the Russian Empire. <strong>Aryeh Zaik</strong>, born in
+        <strong>Odessa, Ukraine</strong>, and his wife <strong>Lea Leika</strong>, born in
+        <strong>Tiraspol, Moldova</strong>, were among the families who made the journey to
+        <strong>Rishon LeTsiyon</strong> — one of the first modern Jewish settlements in Israel.
+      </p>
+      <p>
+        The connected Goldin family arrived from the Kovno Province of <strong>Lithuania</strong>,
+        with branches in Telsai, Keidan, and Vilna. The Gurevitch, Himelfarb, Volchinsky, Averbuch,
+        and Sinyaver families came from the Ukrainian cities of Odessa, Berdychiv, Kherson,
+        Mykolaiv, and Smila — part of the vast wave of Jewish aliyah that shaped modern Israel.
+        Some branches, like the Goldins, also sent family members westward to
+        <strong>Philadelphia</strong>, <strong>Baltimore</strong>, and <strong>Newport</strong>,
+        tracing the twin paths of Jewish emigration in that era.
+      </p>
+      <p>
+        The family put down roots in Israel — in
+        Rishon LeTsiyon, Tel Aviv, Ramat Gan, Rehovot, and Petah Tiqwa —
+        with the youngest generation growing up as native Israelis.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- FAMILY BRANCH SUMMARY STRIP -->
+  <section class="branch-strip" aria-label="Family branch overview">
+    <p class="branch-strip__label">Family branches and migration paths</p>
+    <div class="branch-strip__grid">
+      <div class="branch-pill" style="background:var(--c1-bg);border-color:var(--c1)">
+        <span class="branch-pill__name" style="color:var(--c1)">Zaik branch</span>
+        <span class="branch-pill__route">Odessa → Rishon LeTsiyon</span>
+        <span class="branch-pill__desc">Early settlers of Rishon LeTsiyon, led by Aryeh and Lea Zaik.</span>
+        <div class="branch-pill__links">
+          <a href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents-birth0=Event+et.birth+ey.+epmo.similar&qevents-any1=Event+et.any+ep.+epmo.similar&qevents=List&useTranslation=1&exactSearch=0" target="_blank" rel="noopener" class="branch-pill__link" style="color:var(--c1)">Search Zaik records →</a>
+        </div>
+      </div>
+      <div class="branch-pill" style="background:var(--c4-bg);border-color:var(--c4)">
+        <span class="branch-pill__name" style="color:var(--c4)">Goldin branch</span>
+        <span class="branch-pill__route">Lithuania → Israel &amp; USA</span>
+        <span class="branch-pill__desc">The Goldin family spread across Israel, America, and England.</span>
+        <div class="branch-pill__links">
+          <a href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.goldin+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents-birth0=Event+et.birth+ey.+epmo.similar&qevents-any1=Event+et.any+ep.+epmo.similar&qevents=List&useTranslation=1&exactSearch=0" target="_blank" rel="noopener" class="branch-pill__link" style="color:var(--c4)">Search Goldin records →</a>
+        </div>
+      </div>
+      <div class="branch-pill" style="background:var(--c2-bg);border-color:var(--c2)">
+        <span class="branch-pill__name" style="color:var(--c2)">Averbuch–Berniskai branch</span>
+        <span class="branch-pill__route">Tiraspol &amp; Smila → Tel Aviv</span>
+        <span class="branch-pill__desc">Two Ukrainian families merged in Tel Aviv.</span>
+        <div class="branch-pill__links">
+          <a href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.averbuch+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents-birth0=Event+et.birth+ey.+epmo.similar&qevents-any1=Event+et.any+ep.+epmo.similar&qevents=List&useTranslation=1&exactSearch=0" target="_blank" rel="noopener" class="branch-pill__link" style="color:var(--c2)">Search Averbuch records →</a>
+          <a href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.berniskai+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents-birth0=Event+et.birth+ey.+epmo.similar&qevents-any1=Event+et.any+ep.+epmo.similar&qevents=List&useTranslation=1&exactSearch=0" target="_blank" rel="noopener" class="branch-pill__link" style="color:var(--c2)">Search Berniskai records →</a>
+        </div>
+      </div>
+      <div class="branch-pill" style="background:var(--c3-bg);border-color:var(--c3)">
+        <span class="branch-pill__name" style="color:var(--c3)">Volchinsky–Himelfarb</span>
+        <span class="branch-pill__route">Ukraine → Petah Tiqwa</span>
+        <span class="branch-pill__desc">Two Ukrainian families settled in central Israel.</span>
+        <div class="branch-pill__links">
+          <a href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.volchinsky+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents-birth0=Event+et.birth+ey.+epmo.similar&qevents-any1=Event+et.any+ep.+epmo.similar&qevents=List&useTranslation=1&exactSearch=0" target="_blank" rel="noopener" class="branch-pill__link" style="color:var(--c3)">Search Volchinsky records →</a>
+          <a href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.himelfarb+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents-birth0=Event+et.birth+ey.+epmo.similar&qevents-any1=Event+et.any+ep.+epmo.similar&qevents=List&useTranslation=1&exactSearch=0" target="_blank" rel="noopener" class="branch-pill__link" style="color:var(--c3)">Search Himelfarb records →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PEOPLE IN THIS TREE -->
+  <section class="people-section" aria-labelledby="people-heading">
+    <div class="gen__hd" style="margin-bottom:14px">
+      <h2 id="people-heading" class="gen__label" style="color:var(--c1)">People in this family tree</h2>
+      <div class="gen__line"></div>
+    </div>
+    <p style="font-size:12px;color:var(--text-3);margin-bottom:20px">Key people closest to Yosef Zaik — click any name to discover more</p>
+
+    <div class="people-grid">
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500001&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Yosef+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.M&qevents=List&qaddRelative0_addRelativeName=Name+fn.Aryeh+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qrelatives-addRelative0=Relative+rt.father+rn.*qaddRelative0_addRelativeName&qrelatives=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Yosef Zaik</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500002&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Aryeh+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.M&qevents=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Aryeh Zaik</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500003&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Lea+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.F&qevents=List&qaddRelative0_addRelativeName=Name+fn.Yankel+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Goldin+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qrelatives-addRelative0=Relative+rt.father+rn.*qaddRelative0_addRelativeName&qrelatives=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Lea Leika Zaik</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500004&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Klara+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.F&qevents=List&qaddRelative0_addRelativeName=Name+fn.Aryeh+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qrelatives-addRelative0=Relative+rt.father+rn.*qaddRelative0_addRelativeName&qrelatives=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Klara (Haya) Zaik</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500005&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Yaakov+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.M&qevents=List&qaddRelative0_addRelativeName=Name+fn.Aryeh+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qrelatives-addRelative0=Relative+rt.father+rn.*qaddRelative0_addRelativeName&qrelatives=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Yaakov Zaik</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500006&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Yankel+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Goldin+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.M&qevents=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Yankel Goldin</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500007&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Nachum+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Goldin+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.M&qevents=List&qaddRelative0_addRelativeName=Name+fn.Yankel+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Goldin+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qrelatives-addRelative0=Relative+rt.father+rn.*qaddRelative0_addRelativeName&qrelatives=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Nachum Goldin</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500008&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Chaya+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Goldin+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.F&qevents=List&qaddRelative0_addRelativeName=Name+fn.Yankel+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Goldin+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qrelatives-addRelative0=Relative+rt.father+rn.*qaddRelative0_addRelativeName&qrelatives=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Chaya Sarah Goldin</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500009&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Naomi+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Averbuch+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.F&qevents=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Naomi Averbuch</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+      <a class="person-bubble" href="https://www.myheritage.com/research?action=query&individualId=1500010&rfr=tree&formId=master&formMode=1&useTranslation=1&qname=Name+fn.Gabi+fnmo.2+fnmsvos.1+fnmsmi.1+ln.Flynn+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1+g.M&qevents=List" target="_blank" rel="noopener">
+        <span class="person-bubble__name">Gabi Flynn</span>
+        <span class="person-bubble__cta">Discover more →</span>
+      </a>
+
+    </div>
   </section>
 
 
   <!-- ═══════════════════════════════
-       GEN 1: THE FOUNDERS
+       MORE ZAIK FAMILY TREES
   ═══════════════════════════════ -->
-  <section class="gen" aria-labelledby="gen1-heading">
-    <div class="gen__hd">
-      <span style="color:var(--c1)" class="gen__label">Generation 1 — the founders</span>
+  <section class="zaik-trees" aria-labelledby="zaik-trees-heading">
+    <div class="gen__hd" style="margin-bottom:14px">
+      <h2 id="zaik-trees-heading" class="gen__label" style="color:var(--c1)">More family trees on MyHeritage with the last name "Zaik"</h2>
       <div class="gen__line"></div>
-      <span class="gen__count">Zaik &amp; Goldin patriarchs</span>
     </div>
+    <p style="font-size:12px;color:var(--text-3);margin-bottom:20px">Phonetically similar surnames that may share common ancestry with the Zaik family — common spelling variants across Eastern Europe.</p>
 
-    <div class="pgrid">
+    <div class="zaik-trees__outer">
+      <button class="zaik-trees__btn zaik-trees__btn--prev hidden" id="ztprev" aria-label="Scroll left">&#8249;</button>
+      <div class="zaik-trees__scroll" id="ztscroll">
 
-      <article class="pcard pcard--subject" id="aryeh-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av1" aria-hidden="true">AZ</div>
-        <h3 itemprop="name">Aryeh Zaik</h3>
-        <p class="pcard__sub">Patriarch of the Zaik family</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Odessa, Ukraine</strong></span>,
-          Aryeh Zaik immigrated to Ottoman Palestine and settled in
-          <span itemprop="deathPlace">Rishon LeTsiyon, Israel</span>,
-          where he is buried in the Old Cemetery.
-          Father of Klara (Haya), Yaakov, and Yosef Zaik.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Odessa, Ukraine</span>
-          <span class="tag tag--loc">Rishon LeTsiyon</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/aryeh_zaik" itemprop="url">View full profile →</a>
-      </article>
+        <a class="ztcard" href="https://www.myheritage.com/research/category-5000/family-trees?action=query&qname=Name+fn.+fnmo.2+ln.Zak+lnmo.4&qres=5000" target="_blank" rel="noopener">
+          <div class="ztcard__avatar" style="background:var(--c1-bg);color:var(--c1)">ZK</div>
+          <div class="ztcard__body">
+            <p class="ztcard__name">Zak Family Tree</p>
+            <p class="ztcard__meta">Similar surname · phonetic variant</p>
+            <span class="ztcard__cta">Explore on MyHeritage →</span>
+          </div>
+        </a>
 
-      <article class="pcard pcard--subject" id="lea-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av1" aria-hidden="true">LL</div>
-        <h3 itemprop="name">Lea Leika Zaik</h3>
-        <p class="pcard__sub">Spouse of Aryeh Zaik</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Tiraspol, Moldova</strong></span>,
-          Lea settled in Rishon LeTsiyon, Israel, where she is
-          buried in the Gani Esther old cemetery.
-          Wife of Aryeh Zaik.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Tiraspol, Moldova</span>
-          <span class="tag tag--loc">Rishon LeTsiyon</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/lea_leika" itemprop="url">View full profile →</a>
-      </article>
+        <a class="ztcard" href="https://www.myheritage.com/research/category-5000/family-trees?action=query&qname=Name+fn.+fnmo.2+ln.Ziak+lnmo.4&qres=5000" target="_blank" rel="noopener">
+          <div class="ztcard__avatar" style="background:var(--c2-bg);color:var(--c2)">ZI</div>
+          <div class="ztcard__body">
+            <p class="ztcard__name">Ziak Family Tree</p>
+            <p class="ztcard__meta">Similar surname · phonetic variant</p>
+            <span class="ztcard__cta">Explore on MyHeritage →</span>
+          </div>
+        </a>
 
-      <article class="pcard pcard--diaspora" id="yankel-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true">YG</div>
-        <h3 itemprop="name">Yankel Goldin</h3>
-        <p class="pcard__sub">Patriarch of the Goldin family</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Lithuania / Vilna</strong></span>,
-          Yankel Goldin is the patriarch of the Lithuanian-origin Goldin branch,
-          whose descendants spread to Israel, America, and England.
-          Father of Nachum, Nochim, Chaya Sarah, Rivka Beckie, and others.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Vilna, Lithuania</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/yankel_goldin" itemprop="url">View full profile →</a>
-      </article>
+        <a class="ztcard" href="https://www.myheritage.com/research/category-5000/family-trees?action=query&qname=Name+fn.+fnmo.2+ln.Zaika+lnmo.4&qres=5000" target="_blank" rel="noopener">
+          <div class="ztcard__avatar" style="background:var(--c3-bg);color:var(--c3)">ZA</div>
+          <div class="ztcard__body">
+            <p class="ztcard__name">Zaika Family Tree</p>
+            <p class="ztcard__meta">Similar surname · Slavic variant</p>
+            <span class="ztcard__cta">Explore on MyHeritage →</span>
+          </div>
+        </a>
 
-      <article class="pcard pcard--diaspora" id="cheie-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true">CF</div>
-        <h3 itemprop="name">Cheie Lea Furmansky (Goldin)</h3>
-        <p class="pcard__sub">Spouse of Yankel Goldin</p>
-        <p class="pcard__bio">
-          Born Cheie Lea Lilian Furmansky, she married
-          Yankel Goldin
-          and together they established the Goldin family line
-          across Lithuania and beyond.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Lithuania</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/cheie_furman" itemprop="url">View full profile →</a>
-      </article>
+        <a class="ztcard" href="https://www.myheritage.com/research/category-5000/family-trees?action=query&qname=Name+fn.+fnmo.2+ln.Zayak+lnmo.4&qres=5000" target="_blank" rel="noopener">
+          <div class="ztcard__avatar" style="background:var(--c4-bg);color:var(--c4)">ZY</div>
+          <div class="ztcard__body">
+            <p class="ztcard__name">Zayak Family Tree</p>
+            <p class="ztcard__meta">Similar surname · Eastern European variant</p>
+            <span class="ztcard__cta">Explore on MyHeritage →</span>
+          </div>
+        </a>
 
-      <article class="pcard pcard--diaspora" id="azriel-margolis" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true">AM</div>
-        <h3 itemprop="name">Azriel Mendel Margolis</h3>
-        <p class="pcard__sub">Patriarch of the Margolis family</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Dotnava, Lithuania</strong></span>,
-          Azriel Mendel Margolis is the patriarch of the Margolis line, which connects
-          to the Goldin family through his daughter Chaya Sore.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Dotnava, Lithuania</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/azriel_margolis" itemprop="url">View full profile →</a>
-      </article>
+        <a class="ztcard" href="https://www.myheritage.com/research/category-5000/family-trees?action=query&qname=Name+fn.+fnmo.2+ln.Zajc+lnmo.4&qres=5000" target="_blank" rel="noopener">
+          <div class="ztcard__avatar" style="background:var(--c5-bg);color:var(--c5)">ZC</div>
+          <div class="ztcard__body">
+            <p class="ztcard__name">Zajc Family Tree</p>
+            <p class="ztcard__meta">Similar surname · Central European variant</p>
+            <span class="ztcard__cta">Explore on MyHeritage →</span>
+          </div>
+        </a>
 
-      <article class="pcard" id="gedalyahu-gurevitch" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true">GG</div>
-        <h3 itemprop="name">Gedalyahu (Gedalye) Gurevitch</h3>
-        <p class="pcard__sub">Patriarch of the Gurevitch family</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Russia</strong></span>,
-          Gedalyahu Gurevitch is the patriarch of the Gurevitch branch,
-          whose children — David-Shmuel, Bella, Layzer-Eliezer, Mosik-Moshe,
-          Srulik-Israel, and Yosef — settled across Israel.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Russia</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/gedalyahu_gurevitch" itemprop="url">View full profile →</a>
-      </article>
-
+      </div>
+      <button class="zaik-trees__btn zaik-trees__btn--next" id="ztnext" aria-label="Scroll right">&#8250;</button>
     </div>
-  </section><!-- /gen1 -->
-
-
-  <!-- ═══════════════════════════════
-       GEN 2: THE CHILDREN
-  ═══════════════════════════════ -->
-  <section class="gen" aria-labelledby="gen2-heading">
-    <div class="gen__hd">
-      <span style="color:var(--c2)" class="gen__label">Generation 2 — children of the founders</span>
-      <div class="gen__line"></div>
-      <span class="gen__count">Zaik, Goldin, Gurevitch, Averbuch lines</span>
-    </div>
-
-    <div class="pgrid">
-
-      <article class="pcard" id="klara-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">KZ</div>
-        <h3 itemprop="name">Klara (Haya) Zaik</h3>
-        <p class="pcard__sub">Daughter of Aryeh &amp; Lea Zaik</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Russia</strong></span>,
-          Klara (also known as Haya) was a daughter of
-          Aryeh and Lea Zaik.
-          She settled in <span itemprop="deathPlace">Rishon LeTsiyon, Israel</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Russia</span>
-          <span class="tag tag--loc">Rishon LeTsiyon</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/klara_" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="yaakov-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">YZ</div>
-        <h3 itemprop="name">Yaakov Zaik</h3>
-        <p class="pcard__sub">Son of Aryeh &amp; Lea Zaik</p>
-        <p class="pcard__bio">
-          Son of Aryeh and Lea Zaik.
-          Born and lived in <span itemprop="birthPlace"><strong>Israel</strong></span>,
-          part of the first Israel-born generation of the Zaik family.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Israel</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/yaakov_zaik" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="yosef-zaik" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">YZ</div>
-        <h3 itemprop="name">Yosef Zaik</h3>
-        <p class="pcard__sub">Son of Aryeh &amp; Lea Zaik</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Israel</strong></span>,
-          Yosef Zaik continued the family's roots in
-          <span itemprop="deathPlace">Rishon LeTsiyon</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Rishon LeTsiyon</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/yosef_zaik" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="nachum-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">NG</div>
-        <h3 itemprop="name">Nachum Goldin</h3>
-        <p class="pcard__sub">Son of Yankel Goldin</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Telsai, Kovno Province, Lithuania</strong></span>,
-          Nachum Goldin immigrated to Israel and died in
-          <span itemprop="deathPlace">Rishon LeTsiyon</span>,
-          following in the Zaik family's footsteps to the same settlement.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Telsai, Lithuania</span>
-          <span class="tag tag--loc">Rishon LeTsiyon</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/nachum_goldin" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="chaya-sarah-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">CS</div>
-        <h3 itemprop="name">Chaya Sarah Goldin</h3>
-        <p class="pcard__sub">Daughter of Yankel Goldin · American branch</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Keidan, Lithuania</strong></span>,
-          Chaya Sarah emigrated to the United States and
-          died in <span itemprop="deathPlace">Philadelphia, Pennsylvania</span> —
-          representing the American branch of the Goldin family.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Keidan, Lithuania</span>
-          <span class="tag tag--loc">Philadelphia, USA</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/chaya_goldin" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="nochim-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">NO</div>
-        <h3 itemprop="name">Nochim Goldin</h3>
-        <p class="pcard__sub">Son of Yankel Goldin</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Vilna, Lithuania</strong></span>,
-          Nochim is a son of Yankel Goldin
-          and sibling of Nachum, Chaya Sarah, and Rivka Beckie Goldin.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Vilna, Lithuania</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/nochim_goldin" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="rivka-goldin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">RB</div>
-        <h3 itemprop="name">Rivka Beckie Goldin (Shapiro)</h3>
-        <p class="pcard__sub">Daughter of Yankel Goldin · married Shapiro</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Keidan, Lithuania</strong></span>,
-          Rivka Beckie married David Herman Shapiro
-          and died in <span itemprop="deathPlace">Newport</span>.
-          Part of the Anglo-American branch of the Goldin family.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Keidan, Lithuania</span>
-          <span class="tag tag--loc">Newport, UK</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/rivka_goldin" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="zeev-averbuch" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">ZA</div>
-        <h3 itemprop="name">Zeev (Volodya) Averbuch</h3>
-        <p class="pcard__sub">Patriarch of the Averbuch line</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Tiraspol, southern Russia</strong></span>
-          (the same city as Lea Leika Zaik), Zeev settled in
-          <span itemprop="deathPlace">Tel Aviv, Israel</span>.
-          Husband of Genia (née Berniskai/Alperin). Father of Naomi.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Tiraspol, Russia</span>
-          <span class="tag tag--loc">Tel Aviv</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%96%D7%90%D7%91_%D7%90%D7%95%D7%95%D7%A8%D7%91%D7%95%D7%9A" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="avraham-sinyaver" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">AS</div>
-        <h3 itemprop="name">Avraham Sinyaver</h3>
-        <p class="pcard__sub">Patriarch of the Sinyaver line</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Odessa, Ukraine</strong></span>,
-          Avraham Sinyaver settled in
-          <span itemprop="deathPlace">Tel Aviv, Israel</span>.
-          Father of Ora, Naomi Sinyaver, and grandfather of the Reifman family.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Odessa, Ukraine</span>
-          <span class="tag tag--loc">Tel Aviv</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%90%D7%91%D7%A8%D7%94%D7%9D_%D7%A1%D7%99%D7%A0%D7%99%D7%90%D7%91%D7%A8" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="mordechai-volchinsky" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av2" aria-hidden="true">MV</div>
-        <h3 itemprop="name">Mordechai Volchinsky</h3>
-        <p class="pcard__sub">Patriarch of the Volchinsky line</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Nikolaev (Mykolaiv), Kherson Province, Ukraine</strong></span>,
-          Mordechai Matveivich Volchinsky (also known as Velinsky / Veltzinski)
-          died at Beilinson Hospital, <span itemprop="deathPlace">Petah Tiqwa, Israel</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Nikolaev, Ukraine</span>
-          <span class="tag tag--loc">Petah Tiqwa</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%9E%D7%A8%D7%93%D7%9B%D7%99_%D7%95%D7%95%D7%9C%D7%A6%27%D7%99%D7%A0%D7%A1%D7%A7%D7%99" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="raphael-yavne" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true">RY</div>
-        <h3 itemprop="name">Raphael Asher Yavne</h3>
-        <p class="pcard__sub">American branch</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Shavel (Šiauliai), Lithuania</strong></span>,
-          Raphael Asher Yavne emigrated to the United States
-          and died in <span itemprop="deathPlace">Philadelphia, Pennsylvania</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Shavel, Lithuania</span>
-          <span class="tag tag--loc">Philadelphia, USA</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/raphael_yavne" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="david-shapiro" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true">DS</div>
-        <h3 itemprop="name">David Herman Shapiro</h3>
-        <p class="pcard__sub">Married Rivka Beckie Goldin</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Russia</strong></span>,
-          David Herman Shapiro emigrated and died in
-          <span itemprop="deathPlace">Baltimore, USA</span>.
-          Married Rivka Beckie Goldin.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Russia</span>
-          <span class="tag tag--loc">Baltimore, USA</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/david_shapiro" itemprop="url">View full profile →</a>
-      </article>
-
-    </div>
-  </section><!-- /gen2 -->
-
-
-  <!-- ═══════════════════════════════
-       GEN 3: THE MIDDLE GENERATION
-  ═══════════════════════════════ -->
-  <section class="gen" aria-labelledby="gen3-heading">
-    <div class="gen__hd">
-      <span style="color:var(--c3)" class="gen__label">Generation 3 — the Israeli generation</span>
-      <div class="gen__line"></div>
-      <span class="gen__count">Born in Israel, Ukraine &amp; Moldova</span>
-    </div>
-
-    <div class="pgrid">
-
-      <article class="pcard" id="gabi-flynn" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true">GF</div>
-        <h3 itemprop="name">Gabi Flynn</h3>
-        <p class="pcard__sub">Born Ramat Gan · lives Rishon LeTsiyon</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Ramat Gan, Israel</strong></span>,
-          Gabi Flynn is the son of Frank Leo Flynn
-          and lives in <span itemprop="homeLocation">Rishon LeTsiyon, Israel</span>.
-          Married to Adina Zaik.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Ramat Gan</span>
-          <span class="tag tag--loc">Rishon LeTsiyon</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/gabi_flynn" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="frank-flynn" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av4" aria-hidden="true">FF</div>
-        <h3 itemprop="name">Frank Leo Flynn</h3>
-        <p class="pcard__sub">Father of Gabi Flynn · born England</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>England, United Kingdom</strong></span>,
-          Frank Leo Flynn is the English-origin patriarch of the Flynn branch,
-          connecting the family to Anglo-Jewish heritage.
-          Father of Gabi Flynn.
-        </p>
-        <div class="tags"><span class="tag tag--loc">England, UK</span></div>
-        <a class="plink" href="https://www.myheritage.com/names/frank_%D7%A4%D7%9C%D7%99%D7%9F" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="naomi-averbuch" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true">NA</div>
-        <h3 itemprop="name">Naomi Averbuch (Flynn Arkin)</h3>
-        <p class="pcard__sub">Daughter of Zeev Averbuch</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Tel Aviv-Yafo, Israel</strong></span>,
-          Naomi is the daughter of Zeev Averbuch
-          and Genia (née Berniskai). She died in
-          <span itemprop="deathPlace">Rishon LeTsiyon, Israel</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Tel Aviv</span>
-          <span class="tag tag--loc">Rishon LeTsiyon</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/naomi_%D7%90%D7%95%D7%95%D7%A8%D7%91%D7%95%D7%9A" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="aryeh-volchinsky" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true">AV</div>
-        <h3 itemprop="name">Aryeh (Lonya) Yaron Volchinsky</h3>
-        <p class="pcard__sub">Son of Mordechai Volchinsky</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Kherson / Nikolaev, Ukraine</strong></span>,
-          Aryeh (also known as Lonya or Lev) Volchinsky died at
-          <span itemprop="deathPlace">Ichilov Hospital, Tel Aviv, Israel</span>.
-          Married <span style="font-weight:600;color:var(--text-1)">Rachel Himelfarb</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Kherson, Ukraine</span>
-          <span class="tag tag--loc">Tel Aviv</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%90%D7%A8%D7%99%D7%94_%D7%99%D7%A8%D7%95%D7%9F" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="rachel-himelfarb" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true">RH</div>
-        <h3 itemprop="name">Rachel (Raya) Himelfarb (Volchinsky)</h3>
-        <p class="pcard__sub">Daughter of Zvi Hirsch Himelfarb</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Odessa, Ukraine</strong></span>,
-          Rachel (Raya) Himelfarb married Aryeh Volchinsky.
-          She died in <span itemprop="deathPlace">Holon, Israel</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Odessa, Ukraine</span>
-          <span class="tag tag--loc">Holon, Israel</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%A8%D7%97%D7%9C_%D7%94%D7%99%D7%9E%D7%9C%D7%A4%D7%A8%D7%91" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="tzonya-berniskai" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true">TB</div>
-        <h3 itemprop="name">Tzonya (Tzvia) Berniskai (Averbuch)</h3>
-        <p class="pcard__sub">Married Zeev Averbuch</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Smila, Cherkasy Oblast, Ukraine</strong></span>,
-          Tzonya married Zeev Averbuch
-          and died in <span itemprop="deathPlace">Ramat Efal, Ramat Gan, Israel</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Smila, Ukraine</span>
-          <span class="tag tag--loc">Ramat Gan</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%A6%D7%95%D7%A0%D7%99%D7%94_%D7%91%D7%A8%D7%A0%D7%99%D7%A1%D7%A7%D7%99" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="ora-sinyaver" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true">OS</div>
-        <h3 itemprop="name">Ora Sinyaver (Reifman)</h3>
-        <p class="pcard__sub">Daughter of Avraham Sinyaver</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Tel Aviv-Yafo, Israel</strong></span>,
-          Ora is the daughter of Avraham Sinyaver.
-          She married Uri Reifman and died in
-          <span itemprop="deathPlace">Ramat Gan, Israel</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Tel Aviv</span>
-          <span class="tag tag--loc">Ramat Gan</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/%D7%90%D7%95%D7%A8%D7%94_%D7%A1%D7%99%D7%A0%D7%99%D7%90%D7%91%D7%A8" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="sonia-barankin" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true">SB</div>
-        <h3 itemprop="name">Sonia Barankin (Karni)</h3>
-        <p class="pcard__sub">Married Yehuda Karni</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Oman / Okraina</strong></span>,
-          Sonia Barankin married
-          Yehuda Karni
-          (born in Lithuania) and settled in
-          <span itemprop="homeLocation">Ramat HaShofet, Israel</span>.
-        </p>
-        <div class="tags">
-          <span class="tag tag--loc">Oman / Okraina</span>
-          <span class="tag tag--loc">Ramat HaShofet</span>
-        </div>
-        <a class="plink" href="https://www.myheritage.com/names/sonia_barankin" itemprop="url">View full profile →</a>
-      </article>
-
-      <article class="pcard" id="yehuda-karni" itemscope itemtype="https://schema.org/Person">
-        <div class="pcard__av av3" aria-hidden="true">YK</div>
-        <h3 itemprop="name">Yehuda Karni</h3>
-        <p class="pcard__sub">Married Sonia Barankin</p>
-        <p class="pcard__bio">
-          Born in <span itemprop="birthPlace"><strong>Lithuania</strong></span>,
-          Yehuda Karni married Sonia Barankin
-          and settled in Ramat HaShofet, Israel.
-        </p>
-        <div class="tags"><span class="tag tag--loc">Lithuania</span></div>
-        <a class="plink" href="https://www.myheritage.com/names/yehuda_karni" itemprop="url">View full profile →</a>
-      </article>
-
-    </div>
-  </section><!-- /gen3 -->
+  </section>
 
 
   <!-- ═══════════════════════════════
@@ -908,45 +1642,140 @@
         <p class="branch__eyebrow" style="color:var(--c1)">Zaik branch</p>
         <h2>From Odessa to Rishon LeTsiyon</h2>
         <p>The Zaik family, rooted in Odessa and Tiraspol, were among the early settlers of Rishon LeTsiyon — one of the first Zionist agricultural settlements, founded in 1882. Aryeh and Lea Zaik's descendants have lived there across five generations.</p>
+        <a class="branch__cta" href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.zaik+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents=List&useTranslation=1&exactSearch=0&qevents-any1=Event+et.any+ep.Odessa+epmo.similar" target="_blank" rel="noopener">Discover more about the Zaik branch in Odessa →</a>
       </div>
 
       <div class="branch">
         <p class="branch__eyebrow" style="color:var(--c4)">Goldin branch</p>
         <h2>Lithuania to Israel, America &amp; England</h2>
         <p>The Goldin family from Vilna, Telsai, and Keidan (Kėdainiai), Lithuania dispersed in three directions: Nachum Goldin settled in Rishon LeTsiyon alongside the Zaiks; Chaya Sarah and Rivka Beckie emigrated to America and England; while others remained connected to the Lithuanian Jewish world.</p>
+        <a class="branch__cta" href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.goldin+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents=List&useTranslation=1&exactSearch=0&qevents-any1=Event+et.any+ep.Lithuania+epmo.similar" target="_blank" rel="noopener">Discover more about the Goldin branch in Lithuania →</a>
       </div>
 
       <div class="branch">
         <p class="branch__eyebrow" style="color:var(--c2)">Averbuch–Berniskai branch</p>
         <h2>Tiraspol &amp; Smila to Tel Aviv</h2>
         <p>Zeev Averbuch (from Tiraspol) and Genia née Berniskai (from Smila, Ukraine) met and built their family in Tel Aviv. Their daughter Naomi lived in Rishon LeTsiyon, bridging the Averbuch and Zaik circles.</p>
+        <a class="branch__cta" href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.averbuch+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents=List&useTranslation=1&exactSearch=0&qevents-any1=Event+et.any+ep.Tiraspol+epmo.similar" target="_blank" rel="noopener">Discover more about the Averbuch branch in Tiraspol →</a>
       </div>
 
       <div class="branch">
         <p class="branch__eyebrow" style="color:var(--c3)">Volchinsky–Himelfarb branch</p>
         <h2>Kherson &amp; Berdychiv to Petah Tiqwa</h2>
         <p>The Volchinsky family from Nikolaev (Mykolaiv) and the Himelfarb family from Berdychiv and Odessa converged in Petah Tiqwa, Israel. Aryeh Volchinsky married Rachel Himelfarb, uniting two Ukrainian-origin families in the heart of Israel.</p>
+        <a class="branch__cta" href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.volchinsky+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents=List&useTranslation=1&exactSearch=0&qevents-any1=Event+et.any+ep.Ukraine+epmo.similar" target="_blank" rel="noopener">Discover more about the Volchinsky branch in Ukraine →</a>
       </div>
 
       <div class="branch">
         <p class="branch__eyebrow" style="color:var(--c5)">Sinyaver–Reifman branch</p>
         <h2>Odessa to Tel Aviv &amp; Ramat Gan</h2>
         <p>Avraham Sinyaver emigrated from Odessa to Tel Aviv. His daughter Ora Sinyaver and her husband Uri Reifman built their family in Ramat Gan.</p>
+        <a class="branch__cta" href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.sinyaver+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents=List&useTranslation=1&exactSearch=0&qevents-any1=Event+et.any+ep.Odessa+epmo.similar" target="_blank" rel="noopener">Discover more about the Sinyaver branch in Odessa →</a>
       </div>
 
       <div class="branch">
         <p class="branch__eyebrow" style="color:var(--c4)">Flynn branch</p>
         <h2>England to Ramat Gan &amp; Rishon LeTsiyon</h2>
         <p>Frank Leo Flynn, born in England, is the patriarch of the Israeli Flynn family. His son Gabi, born in Ramat Gan, married Adina Zaik — joining the English and Zionist pioneer heritages into a single Israeli family.</p>
+        <a class="branch__cta" href="https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.+fnmo.2+fnmsvos.1+fnmsmi.1+ln.flynn+lnmo.4+lnmsdm.1+lnmsmf3.1+lnmsrs.1&qevents=List&useTranslation=1&exactSearch=0&qevents-any1=Event+et.any+ep.England+epmo.similar" target="_blank" rel="noopener">Discover more about the Flynn branch in England →</a>
       </div>
 
     </div>
   </section>
 
+
+
+
 </div><!-- /view-narrative -->
-
-
 <script>
+  function handleSearch(btn) {
+    var bar = btn.closest('.chronicle-search__bar');
+    var inputs = bar.querySelectorAll('input');
+    var q = Array.from(inputs).map(i => i.value.trim()).filter(Boolean).join(' ');
+    if (q) {
+      window.open('https://www.myheritage.com/research/?q.first=' + encodeURIComponent(inputs[0].value.trim()) + '&q.last=' + encodeURIComponent(inputs[1].value.trim()), '_blank');
+    }
+  }
+
+  function scrollRow(id, dir) {
+    var row = document.getElementById(id);
+    if (!row) return;
+    var cardW = 210 + 14; // card width + gap
+    row.scrollBy({ left: dir * cardW * 3, behavior: 'smooth' });
+    setTimeout(function() { updateArrows(id); }, 350);
+  }
+
+  function updateArrows(id) {
+    var row = document.getElementById(id);
+    if (!row) return;
+    var wrap = row.closest('.pgrid-wrap');
+    var prev = wrap.querySelector('.pgrid-arrow--prev');
+    var next = wrap.querySelector('.pgrid-arrow--next');
+    if (prev) prev.classList.toggle('hidden', row.scrollLeft <= 0);
+    if (next) next.classList.toggle('hidden', row.scrollLeft + row.clientWidth >= row.scrollWidth - 4);
+  }
+
+  // Init arrows on load
+  document.addEventListener('DOMContentLoaded', function() {
+    var htlW = document.getElementById('htl-wrap');
+    if (htlW) { updHtl(); htlW.addEventListener('scroll', updHtl); }
+
+    ['gen1-row','gen2-row','gen3-row'].forEach(function(id) {
+      var row = document.getElementById(id);
+      if (row) {
+        updateArrows(id);
+        row.addEventListener('scroll', function() { updateArrows(id); });
+      }
+    });
+  });
+
+  // Zaik trees carousel
+  (function() {
+    var sc = document.getElementById('ztscroll');
+    var bp = document.getElementById('ztprev');
+    var bn = document.getElementById('ztnext');
+    if (!sc) return;
+    function upd() {
+      bp.classList.toggle('hidden', sc.scrollLeft <= 0);
+      bn.classList.toggle('hidden', sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 4);
+    }
+    sc.addEventListener('scroll', upd);
+    bp.addEventListener('click', function(){ sc.scrollBy({left:-232,behavior:'smooth'}); setTimeout(upd,350); });
+    bn.addEventListener('click', function(){ sc.scrollBy({left:232,behavior:'smooth'}); setTimeout(upd,350); });
+    upd();
+  })();
+
+  function scrollHtl2(dir) {
+    var w = document.getElementById('htl-wrap');
+    if (!w) return;
+    w.scrollBy({left: dir * 200 * 3, behavior: 'smooth'});
+    setTimeout(function(){ updHtl(); }, 350);
+  }
+  function updHtl() {
+    var w = document.getElementById('htl-wrap');
+    if (!w) return;
+    var p = document.getElementById('htl-prev');
+    var n = document.getElementById('htl-next');
+    if (p) p.classList.toggle('hidden', w.scrollLeft <= 0);
+    if (n) n.classList.toggle('hidden', w.scrollLeft + w.clientWidth >= w.scrollWidth - 4);
+  }
+  function scrollHtl2_old(dir) {
+    var row = document.getElementById('htl-row');
+    if (!row) return;
+    row.scrollBy({ left: dir * 200 * 3, behavior: 'smooth' });
+    setTimeout(function() { updateHtlArrows(); }, 350);
+  }
+
+  function updateHtlArrows() {
+    var row = document.getElementById('htl-row');
+    if (!row) return;
+    var wrap = row.closest('.htl-scroll-wrap');
+    var prev = wrap.querySelector('.htl-arrow--prev');
+    var next = wrap.querySelector('.htl-arrow--next');
+    if (prev) prev.classList.toggle('hidden', row.scrollLeft <= 0);
+    if (next) next.classList.toggle('hidden', row.scrollLeft + row.clientWidth >= row.scrollWidth - 4);
+  }
+
   function switchView(v) {
     var tree      = document.getElementById('view-tree');
     var narrative = document.getElementById('view-narrative');
