@@ -644,11 +644,14 @@
     /* ── IMMIGRATION + MIGRATION TWO-COLUMN ── */
     .immig-section { margin-bottom: 48px; }
     .immig-two-col {
-      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
     }
     .immig-left { width: 100%; }
     .immig-migration-text {
-      padding: 20px 0 0;
+      padding: 0;
     }
     .immig-migration-text h2 {
       font-family: var(--font-body);
@@ -1428,9 +1431,7 @@
         </div><!-- /immig-wrap -->
       </div><!-- /immig-left -->
 
-    </div><!-- /immig-two-col -->
-
-    <!-- Migration text below the bar card -->
+    <!-- Migration text as right column -->
     <div class="immig-migration-text" aria-labelledby="migration-heading">
       <h2 id="migration-heading" class="gen__label" style="color:var(--text-1);font-size:16px;font-weight:700;text-transform:none;letter-spacing:0;margin-bottom:14px">The great migration: from the Pale of Settlement to Eretz Israel</h2>
       <p>
@@ -1454,7 +1455,8 @@
         Rishon LeTsiyon, Tel Aviv, Ramat Gan, Rehovot, and Petah Tiqwa —
         with the youngest generation growing up as native Israelis.
       </p>
-    </div>
+    </div><!-- /immig-migration-text -->
+    </div><!-- /immig-two-col -->
   </section>
 
 
